@@ -4,9 +4,28 @@ import 'brace/mode/html';
 import 'brace/theme/twilight';
 import 'brace/ext/language_tools';
 import 'brace/snippets/html';
+import { connect } from 'react-redux';
+import { UPDATE_EDITOR_SRC } from '../../actions/editorActions';
 
-export default class Editor extends Component {
+const mapStateToProps = (state /*, ownProps*/) => {
+    let editorReducer = state.editorReducer;
+    return {
+      editorProps: editorReducer
+    };
+  }, mapDispatchToProps = dispatch => {
+    return {
+      updateEditor: (src) => {
+        dispatch({ type: UPDATE_EDITOR_SRC, payload: src });
+      }
+    };
+  };
+
+class Editor extends Component {
+  onChange = (newValue) => {
+    this.props.updateEditor(newValue);
+  }
   render() {
+    let editorProps = this.props.editorProps;
     return (
       <AceEditor
         placeholder="Placeholder Text"
@@ -18,7 +37,8 @@ export default class Editor extends Component {
         showPrintMargin={true}
         showGutter={true}
         highlightActiveLine={true}
-        value={this.props.src}
+        value = {editorProps.currentCode}
+        onChange = {this.onChange}
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
@@ -29,3 +49,7 @@ export default class Editor extends Component {
     );
   }
 }
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Editor);
