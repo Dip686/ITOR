@@ -1,0 +1,4 @@
+const UPDATE_EDITOR_SRC = 'UPDATE_EDITOR_SRC';
+export {
+  UPDATE_EDITOR_SRC
+};
