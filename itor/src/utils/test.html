@@ -1,0 +1,3151 @@
+<!doctype html>
+<html data-n-head-ssr data-n-head="">
+
+<head data-n-head="">
+  <title data-n-head="true">Create a Chart Using FusionCharts | FusionCharts</title>
+  <meta data-n-head="true" charset="utf-8">
+  <meta data-n-head="true" name="viewport" content="width=device-width, initial-scale=1">
+  <meta data-n-head="true" data-hid="description" name="description"
+    content="This article outlines the steps to be executed for creating your first chart using the plain javascript.">
+  <link data-n-head="true" rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link data-n-head="true" rel="stylesheet" href="//ds.fusioncharts.com/2.0.20/css/ds.css">
+  <script data-n-head="true" src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CNodeList.prototype.forEach"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//ds.fusioncharts.com/2.0.20/js/ds.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.jsdelivr.net/npm/hc-sticky@2.2.3/dist/hc-sticky.min.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.ocean.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.carbon.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.umber.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script data-n-head="true" src="https://wchat.freshchat.com/js/widget.js"
+    type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <base href="/dev">
+  <link rel="preload" href="/dev/_nuxt/16032de5e05c19ab3db5.js" as="script">
+  <link rel="preload" href="/dev/_nuxt/2551c1210e8be6c18907.js" as="script">
+  <link rel="preload" href="/dev/_nuxt/301a8f165eb622598a38.js" as="script">
+  <link rel="preload" href="/dev/_nuxt/e8040aae1649b3092423.js" as="script">
+  <link rel="preload" href="/dev/_nuxt/526fe851a8b7029d4431.js" as="script">
+  <link rel="preload" href="/dev/_nuxt/46ed6423bb8b4a95d297.js" as="script">
+  <style
+    data-vue-ssr-id="b15e4592:0 5d7546b1:0 17cfdfa9:0 41b6f62d:0 5b3bbc70:0 00fe0814:0 a6c61f58:0 da346482:0 43453a42:0 20592e0b:0">
+    @charset "UTF-8";
+
+    .btn-copy {
+      height: 23px;
+      opacity: 0;
+      position: absolute;
+      top: 10px;
+      right: 20px !important;
+      padding: 5px 12px;
+      background: #272822;
+      border-color: #8786a4;
+      color: #8786a4;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 12px;
+      z-index: 99
+    }
+
+    .btn-copy:active,
+    .btn-copy:hover {
+      color: #fff;
+      background: #8786a4
+    }
+
+    pre {
+      position: static;
+      background: #22263b;
+      padding: 16px
+    }
+
+    pre code {
+      color: #fff;
+      padding-left: 0
+    }
+
+    .code-wrapper~p {
+      margin-top: 2.4rem
+    }
+
+    .code-wrapper .tab pre {
+      position: relative
+    }
+
+    .code-wrapper:hover .btn-copy {
+      opacity: 1
+    }
+
+    li code,
+    p code {
+      font-weight: 400
+    }
+
+    #cooltoast-container {
+      position: fixed;
+      top: 100px;
+      right: 0;
+      width: auto;
+      z-index: 999
+    }
+
+    .cooltoast-toast {
+      position: relative;
+      padding: 8px 12px;
+      margin: 16px;
+      border-radius: 4px;
+      background: #f5f5f5;
+      cursor: pointer;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .08), 0 1px 3px rgba(0, 0, 0, .19);
+      -webkit-animation-name: cooltoast;
+      animation-name: cooltoast;
+      -webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+      animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+      min-width: 200px
+    }
+
+    .cooltoast-fadeOut,
+    .cooltoast-toast {
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s
+    }
+
+    .cooltoast-fadeOut {
+      -webkit-animation-name: cooltoastFadeOut;
+      animation-name: cooltoastFadeOut;
+      -webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+      animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards
+    }
+
+    #cooltoast-container h4,
+    #cooltoast-container p {
+      margin: 3px 0 !important
+    }
+
+    .cooltoast-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 10px
+    }
+
+    .cooltoast-text {
+      font-size: 14px;
+      color: #777
+    }
+
+    .cooltoast-icon {
+      position: absolute;
+      top: 5px;
+      left: -40px;
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      background: #fff
+    }
+
+    .cooltoast-toast a,
+    .cooltoast-toast a:hover {
+      color: #549edb !important;
+      text-decoration: none !important
+    }
+
+    .cooltoast-success {
+      border-bottom: 2px solid #51c625
+    }
+
+    .cooltoast-warning {
+      border-bottom: 2px solid #db9215
+    }
+
+    .cooltoast-error {
+      border-bottom: 2px solid #db2b1d
+    }
+
+    .cooltoast-info {
+      border-bottom: 2px solid #27abdb
+    }
+
+    @-webkit-keyframes cooltoast {
+      0% {
+        -webkit-transform: translate3d(400px, 0, 0);
+        transform: translate3d(400px, 0, 0);
+        opacity: 0
+      }
+
+      to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1
+      }
+    }
+
+    @keyframes cooltoast {
+      0% {
+        -webkit-transform: translate3d(400px, 0, 0);
+        transform: translate3d(400px, 0, 0);
+        opacity: 0
+      }
+
+      to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1
+      }
+    }
+
+    @-webkit-keyframes cooltoastFadeOut {
+      0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1
+      }
+
+      to {
+        -webkit-transform: translate3d(400px, 0, 0);
+        transform: translate3d(400px, 0, 0);
+        opacity: 0
+      }
+    }
+
+    @keyframes cooltoastFadeOut {
+      0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1
+      }
+
+      to {
+        -webkit-transform: translate3d(400px, 0, 0);
+        transform: translate3d(400px, 0, 0);
+        opacity: 0
+      }
+    }
+
+    .dropholder {
+      width: 322px;
+      height: 60px;
+      margin: 10px auto;
+      position: relative;
+      color: #73748c;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .2px;
+      line-height: 18px;
+      opacity: 0;
+      display: none
+    }
+
+    .dropholder p {
+      line-height: 40px;
+      font-size: 16px;
+      margin: 0
+    }
+
+    .dropholder .dropdown,
+    .dropholder .dropdownMenu,
+    .dropholder .dropholder {
+      background-color: #fff
+    }
+
+    .dropholder .dropdown {
+      float: left;
+      cursor: pointer;
+      height: 40px;
+      position: relative;
+      width: 100%;
+      padding-left: 20px;
+      border: 1px solid rgba(62, 57, 107, .13);
+      border-radius: 4px;
+      box-shadow: 0 2px 4px 0 rgba(62, 57, 107, .04)
+    }
+
+    .dropholder .dropdown:hover {
+      background-color: #fdfdfd
+    }
+
+    .dropholder .dropdown:after {
+      content: "▾";
+      font-size: 18px;
+      position: absolute;
+      right: 20px;
+      top: 9px;
+      display: block
+    }
+
+    .dropholder .dropdown.active+.dropdownMenu {
+      display: block
+    }
+
+    .dropholder .dropdownMenu {
+      padding: 0;
+      position: absolute;
+      left: 0;
+      top: 43px;
+      right: 0;
+      margin: 0;
+      cursor: pointer;
+      display: none;
+      z-index: 5;
+      overflow: hidden;
+      border: 1px solid rgba(62, 57, 107, .13);
+      border-radius: 4px;
+      box-shadow: 0 2px 4px 0 rgba(62, 57, 107, .04)
+    }
+
+    .dropholder .dropdownMenu li {
+      padding: 10px 20px;
+      color: #73748c;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: .2px;
+      line-height: 18px;
+      list-style: none;
+      transition: all .35s ease;
+      margin-bottom: 0
+    }
+
+    .dropholder .dropdownMenu li:hover {
+      background-color: rgba(62, 57, 107, .03);
+      color: #6756d6
+    }
+
+    .dropholder .dropdownMenu li:last-child {
+      border: none
+    }
+
+    @media only screen and (max-width:992px) {
+      .dropholder {
+        opacity: 1;
+        display: block
+      }
+
+      .code-tabs {
+        display: none
+      }
+    }
+
+    .codeblock-feedbackform .btn-light,
+    .codeblock-feedbackform button {
+      position: relative !important;
+      left: 0;
+      bottom: 0;
+      max-width: 200px
+    }
+
+    .codeblock-feedbackform textarea {
+      resize: none
+    }
+
+    .codeblock-feedbackform .custom-container {
+      display: flex
+    }
+
+    @media (max-width:407px) {
+      .codeblock-feedbackform .custom-container {
+        flex-wrap: wrap
+      }
+
+      .codeblock-feedbackform .custom-container .radio-container-label:first-child {
+        margin-left: 0
+      }
+    }
+
+    .codeblock-feedbackform .codeblock-form-container {
+      display: flex;
+      background-color: #fff;
+      padding: 15px 20px;
+      color: #313131;
+      font-size: 16px;
+      line-height: 23px;
+      font-weight: 500
+    }
+
+    .codeblock-feedbackform .codeblock-form-items {
+      display: none
+    }
+
+    .codeblock-feedbackform .codeblock-form-items .form-item-container {
+      border-top: 1px solid rgba(0, 0, 0, .06);
+      background-color: #fff
+    }
+
+    .codeblock-feedbackform .codeblock-form-items .form-item-container.no-border {
+      border: none
+    }
+
+    .codeblock-feedbackform .codeblock-form-items .form-item-container .contact-signature-box {
+      display: flex;
+      align-items: flex-start
+    }
+
+    .codeblock-feedbackform .codeblock-form-items .form-item-container .contact-signature-box .contact-signature {
+      padding-left: 8px;
+      color: #73748c;
+      font-size: 12px;
+      line-height: 15px
+    }
+
+    .codeblock-feedbackform .feedback-form span.header {
+      color: #313131;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px
+    }
+
+    .codeblock-feedbackform .label-placeholder {
+      position: absolute;
+      top: 9px;
+      left: 17px;
+      transition: all .3s ease
+    }
+
+    .codeblock-feedbackform .move-label {
+      top: -14px;
+      background-color: #fff
+    }
+
+    .codeblock-feedbackform .email-section {
+      position: relative
+    }
+
+    .codeblock-feedbackform .email-section span {
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      font-style: italic;
+      opacity: .4;
+      transition: opacity .3s ease
+    }
+
+    .codeblock-feedbackform .email-section span.fc-hide {
+      opacity: 0
+    }
+
+    .codeblock-feedbackform .success-feedback {
+      padding-bottom: 5px
+    }
+
+    .tab .codeblock-feedbackform,
+    ul .codeblock-feedbackform {
+      padding-top: 10px
+    }
+
+    .tab .codeblock-form-container,
+    ul .codeblock-form-container {
+      box-shadow: none;
+      padding: 0 0 30px;
+      margin-bottom: 0
+    }
+
+    .tab .codeblock-feedbackform,
+    ul .codeblock-feedbackform {
+      border-bottom: 1px solid rgba(0, 0, 0, .06)
+    }
+
+    .tab .codeblock-feedbackform:last-child,
+    ul .codeblock-feedbackform:last-child {
+      border: none
+    }
+
+    .tab .codeblock-feedbackform:last-child .codeblock-form-container,
+    ul .codeblock-feedbackform:last-child .codeblock-form-container {
+      padding: 0 15px;
+      margin-bottom: 0
+    }
+
+    .tab .form-item-container,
+    ul .form-item-container {
+      margin-top: 1rem
+    }
+
+    .tab .codeblock-form-container {
+      padding: 0 20px
+    }
+
+    .tab .codeblock-feedbackform,
+    .tab .codeblock-feedbackform .radio-btn-con {
+      padding: 0
+    }
+
+    .checkbox-container {
+      display: block;
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 10px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    .checkbox-container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0
+    }
+
+    .checkbox-container span {
+      padding: 0 !important
+    }
+
+    .checkbox-container .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 12px;
+      width: 12px;
+      background-color: #eee;
+      border-radius: 2px
+    }
+
+    .checkbox-container:hover input~.checkmark {
+      background-color: #ccc
+    }
+
+    .checkbox-container input:checked~.checkmark {
+      background-color: #48b884
+    }
+
+    .checkbox-container .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none
+    }
+
+    .checkbox-container input:checked~.checkmark:after {
+      display: block
+    }
+
+    .checkbox-container .checkmark:after {
+      left: 1px;
+      top: 1px;
+      width: 10px;
+      height: 10px;
+      border: 1px solid #fff;
+      background-color: #48b884;
+      border-radius: 1px
+    }
+
+    .radio-container-label {
+      position: relative;
+      padding-left: 26px;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      margin-left: 10px
+    }
+
+    .radio-container-label input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer
+    }
+
+    .radio-container .checkmark {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      height: 18px;
+      width: 18px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 2px solid #949697;
+      opacity: .6;
+      transition: all .3s ease
+    }
+
+    .radio-container-label:hover input~.checkmark {
+      background-color: #eee
+    }
+
+    .radio-container-label input:checked~.checkmark {
+      background-color: #48b884;
+      border: none;
+      opacity: 1
+    }
+
+    .radio-container .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none
+    }
+
+    .radio-container-label input:checked~.checkmark:after {
+      display: block
+    }
+
+    .radio-container-label .checkmark:after {
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: #48b884;
+      border: 2px solid #fff
+    }
+
+    pre {
+      max-height: 400px
+    }
+
+    .badge-light {
+      color: #8786a4;
+      border: 1px solid rgba(62, 57, 107, .13);
+      border-radius: 2px;
+      background-color: rgba(62, 57, 107, .04)
+    }
+
+    .code-wrapper {
+      position: relative
+    }
+
+    .code-wrapper .tab-content .tab {
+      position: relative;
+      box-shadow: 0 2px 4px 0 rgba(62, 57, 107, .01)
+    }
+
+    .code-wrapper .tab-content .tab .btn-copy {
+      position: absolute;
+      right: 27px;
+      bottom: 25px
+    }
+
+    .code-wrapper .tab-content .tab.active {
+      display: block
+    }
+
+    .code-wrapper .tab-content .tab pre {
+      overflow: auto;
+      max-height: 250px;
+      border: 1px solid #eeeef0;
+      padding: 10px
+    }
+
+    .code-wrapper .tab-content .tab strong {
+      margin-bottom: 0 !important
+    }
+
+    .code-wrapper .tab-content .tab ol li strong {
+      margin-bottom: 0
+    }
+
+    .code-wrapper .btn {
+      position: absolute;
+      right: 10px;
+      bottom: 10px
+    }
+
+    .code-tabs,
+    .tab-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center
+    }
+
+    .code-tabs:after,
+    .tab-list ul:after {
+      content: "";
+      display: table;
+      clear: both
+    }
+
+    .code-tabs li,
+    .tab-list ul li {
+      display: inline-block;
+      margin-left: 10px
+    }
+
+    .code-tabs li:first-child,
+    .tab-list ul li:first-child {
+      margin-left: 0
+    }
+
+    .code-tabs li a,
+    .code-tabs li span,
+    .tab-list ul li a,
+    .tab-list ul li span {
+      display: block;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #434456 !important;
+      transition: all .3s ease
+    }
+
+    .code-tabs li.active a,
+    .code-tabs li.active span,
+    .code-tabs li:hover a,
+    .code-tabs li:hover span,
+    .tab-list ul li.active a,
+    .tab-list ul li.active span,
+    .tab-list ul li:hover a,
+    .tab-list ul li:hover span {
+      background-color: #6957da;
+      color: #fff !important;
+      border-radius: 4px
+    }
+
+    .chart-example {
+      border-radius: 4px;
+      overflow: hidden
+    }
+
+    .maps-attributes p {
+      margin: 2.5rem 0 1.5rem;
+      font-weight: 600
+    }
+
+    .code-wrapper pre {
+      overflow: auto;
+      max-height: 250px;
+      border: 1px solid #eeeef0;
+      padding: 10px
+    }
+
+    .search-wrapper {
+      position: relative
+    }
+
+    .search-wrapper .form-control {
+      padding: 1.1rem 3rem 1.1rem 1.55rem
+    }
+
+    .search-wrapper i {
+      position: absolute;
+      right: 24px;
+      top: 16px;
+      opacity: .3
+    }
+
+    .search-wrapper .search-result {
+      position: absolute;
+      left: 0;
+      top: 48px;
+      z-index: 10;
+      background-color: #fff;
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, .2);
+      width: 100%
+    }
+
+    .search-wrapper .search-result ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 200px;
+      overflow: auto
+    }
+
+    .search-wrapper .search-result ul li span {
+      display: block;
+      padding: 5px 10px
+    }
+
+    .search-wrapper .search-result ul li span:hover {
+      cursor: pointer;
+      background-color: #0da19a;
+      color: #fff
+    }
+
+    .page-content .sub-heading {
+      margin: 1.6rem 0
+    }
+
+    .page-content .h1,
+    .page-content h1 {
+      margin-bottom: 3.2rem
+    }
+
+    .page-content h2,
+    .page-content h3,
+    .page-content h4,
+    .page-content h5,
+    .page-content h6 {
+      margin-top: 4.8rem;
+      margin-bottom: 1.6rem
+    }
+
+    .page-content .tab h4 {
+      margin-top: 2.8rem
+    }
+
+    .page-content img {
+      max-width: 100%;
+      display: block;
+      margin: 0 auto 20px
+    }
+
+    .page-content ol li,
+    .page-content ul li {
+      margin-bottom: 1.2rem
+    }
+
+    .page-content ol li p,
+    .page-content ul li p {
+      margin-bottom: 0 !important
+    }
+
+    .page-content ol li ol,
+    .page-content ol li ul,
+    .page-content ul li ol,
+    .page-content ul li ul {
+      margin: 1.3rem 0
+    }
+
+    .page-content table,
+    .page-content table td,
+    .page-content table th {
+      background-color: #fff
+    }
+
+    .page-content table thead th {
+      border-bottom: 2px solid #eaeaea
+    }
+
+    .page-content table {
+      border: none;
+      border-radius: 4px
+    }
+
+    .page-content .table-responsive {
+      box-shadow: 0 2px 4px 0 rgba(104, 105, 128, .3);
+      border-radius: 4px;
+      overflow: auto
+    }
+
+    .page-content table.table {
+      margin-bottom: 0
+    }
+
+    .page-content table.table td,
+    .page-content table.table th {
+      border: 1px solid #efefef
+    }
+
+    .page-content table.table td:last-child,
+    .page-content table.table th:last-child {
+      border-right: 0
+    }
+
+    .page-content table.table thead td,
+    .page-content table.table thead th {
+      padding: 1.2rem 1rem;
+      background-color: #fafafd
+    }
+
+    @media (min-width:800px) {
+
+      .page-content table.table thead td,
+      .page-content table.table thead th {
+        min-width: 12rem
+      }
+    }
+
+    .page-content table.table thead td:first-child {
+      min-width: 18rem
+    }
+
+    .page-content table.table tbody th {
+      font-weight: 300
+    }
+
+    .page-content table.table tbody td,
+    .page-content table.table tbody th {
+      padding: 1rem
+    }
+
+    .page-content table.table tbody td:first-child,
+    .page-content table.table tbody th:first-child {
+      word-break: normal
+    }
+
+    .page-content table.table tbody td code,
+    .page-content table.table tbody th code {
+      word-break: break-all !important
+    }
+
+    .page-content table.table tbody p:last-child {
+      margin-bottom: 0
+    }
+
+    .page-content table.table tbody td.text-warning {
+      color: #e9520c !important
+    }
+
+    .page-content .alert li:last-child,
+    .page-content .alert p:last-child {
+      margin-bottom: 0
+    }
+
+    .page-content p img {
+      display: block;
+      margin: 0 auto
+    }
+
+    .page-content p span img {
+      display: inline;
+      max-width: none;
+      width: auto
+    }
+
+    .page-content pre {
+      margin-bottom: 2rem
+    }
+
+    .chart-example {
+      width: 100%;
+      text-align: center;
+      background: #fff;
+      padding: 1.5rem
+    }
+
+    .card-block .codeblock-feedbackform .codeblock-form-container {
+      border-top: 1px solid #f0f0f0 !important
+    }
+
+    .card-block .table tbody td:last-child,
+    .card-block .table tbody th:last-child,
+    .card-block .table thead td:last-child,
+    .card-block .table thead th:last-child {
+      border-right: 1px solid #efefef
+    }
+
+    .code-wrapper .code-tabs li,
+    .code-wrapper .tab-list li {
+      margin-bottom: 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px 0 rgba(104, 105, 128, .1);
+      font-weight: 600;
+      letter-spacing: .23px;
+      font-size: 15px;
+      line-height: 19px;
+      color: #434456;
+      background-color: #fff
+    }
+
+    @media (min-width:800px) {
+
+      .code-wrapper .code-tabs li,
+      .code-wrapper .tab-list li {
+        min-width: 120px
+      }
+    }
+
+    .code-wrapper .tab-list {
+      margin-bottom: 10px
+    }
+
+    .code-wrapper .tab-list li {
+      box-shadow: 0 2px 4px 0 rgba(104, 105, 128, .3)
+    }
+
+    .code-wrapper .tab-content {
+      margin-bottom: 2rem
+    }
+
+    .code-wrapper .tab-content .tab {
+      border-radius: 4px;
+      padding: 10px;
+      display: none;
+      overflow: hidden;
+      background: #fff
+    }
+
+    .code-wrapper .tab-content .tab+div strong {
+      display: inline-block;
+      margin-bottom: 2rem
+    }
+
+    .code-wrapper .tab-content .tab>div {
+      padding: 10px
+    }
+
+    .code-wrapper .tab-content .tab>h4 {
+      margin-left: 10px
+    }
+
+    .code-wrapper .tab-content .tab h4+pre {
+      margin: 0 10px 10px
+    }
+
+    .code-wrapper .tab-content .tab ol,
+    .code-wrapper .tab-content .tab ul {
+      margin-bottom: 2rem
+    }
+
+    .code-wrapper .tab-content .tab ol li,
+    .code-wrapper .tab-content .tab ul li {
+      margin-bottom: 1rem
+    }
+
+    .code-wrapper .tab-content .tab pre {
+      margin: 0;
+      border-radius: 5px
+    }
+
+    .code-wrapper .tab-content .tab pre+p:last-child {
+      margin-bottom: 0
+    }
+
+    .code-wrapper .tab-content .tab .text-success {
+      padding: 10px 20px;
+      border: 1px solid rgba(17, 160, 141, .8);
+      background: rgba(17, 160, 141, .2);
+      color: #11a08d !important;
+      width: 100%;
+      border-radius: 2px;
+      margin-top: 1rem
+    }
+
+    blockquote {
+      border: 1px solid #e9ecef;
+      border-left: 0;
+      position: relative;
+      padding: 2rem 3rem;
+      margin-top: 3.2rem;
+      margin-bottom: 3.2rem;
+      background-color: #fff
+    }
+
+    blockquote p:last-child {
+      margin-bottom: 0
+    }
+
+    blockquote:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 4px;
+      background: linear-gradient(0deg, #6374c5, #2ab4c1)
+    }
+
+    .page-content p img {
+      max-width: 100%;
+      height: auto
+    }
+
+    .multi-chart {
+      padding-left: 100px;
+      background-color: #fff
+    }
+
+    .multi-chart>div {
+      float: left;
+      margin-left: -100px
+    }
+
+    .multi-chart>div #thumbnail-bar .fusioncharts-container,
+    .multi-chart>div #thumbnail-column .fusioncharts-container,
+    .multi-chart>div #thumbnail-pie .fusioncharts-container {
+      margin: 5px
+    }
+
+    code[class*=language-],
+    pre[class*=language-] {
+      font-size: 1.3rem !important
+    }
+
+    h2,
+    h3 {
+      cursor: pointer
+    }
+
+    h2:hover .hash-node,
+    h3:hover .hash-node {
+      opacity: 1
+    }
+
+    .hash-node {
+      text-decoration: none;
+      margin-left: 7px;
+      font-size: 22px;
+      font-weight: 600;
+      opacity: 0;
+      transition: all .3s ease;
+      color: #9789f1
+    }
+
+    .hash-node:hover {
+      color: #6957da
+    }
+
+    .btn-group-secondary {
+      box-shadow: 0 4px 6px 0 rgba(50, 50, 93, .11);
+      border-radius: 4px;
+      overflow: hidden
+    }
+
+    .btn-group-secondary .btn {
+      box-shadow: none;
+      border-left: 1px solid #f3f3f3 !important;
+      background: #fff;
+      margin-left: 0
+    }
+
+    .btn-group-secondary .btn:first-child {
+      border-left: 0 !important
+    }
+
+    .btn-group-secondary .btn:hover {
+      box-shadow: none
+    }
+
+    .btn-group-secondary .btn.active {
+      color: #fff;
+      background: linear-gradient(90deg, #5b72de, #745ff9) !important;
+      box-shadow: none;
+      outline: none !important
+    }
+
+    .btn-group-secondary .btn.active:active,
+    .btn-group-secondary .btn.active:focus,
+    .btn-group-secondary .btn:not(:disabled):not(.disabled).active:focus,
+    .btn-group-secondary .btn:not(:disabled):not(.disabled):active:focus {
+      box-shadow: none;
+      outline: none
+    }
+
+    .events a {
+      display: inline-block
+    }
+
+    .events a strong {
+      display: block;
+      background: #2cc7c0;
+      background: linear-gradient(90deg, #2cc7c0, #59d99d);
+      border: none;
+      box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, .15), 0 1px 1px rgba(49, 49, 49, .075);
+      color: #fff;
+      padding: 4px 15px 5px;
+      border-radius: 4px
+    }
+
+    .events a:hover {
+      text-decoration: none
+    }
+
+    .events a:hover strong {
+      background: #25a8a2;
+      background: linear-gradient(90deg, #25a8a2, #3ad28b);
+      color: #fff
+    }
+
+    code[class*=language-],
+    pre[class*=language-] {
+      color: #f8f8f2;
+      background: none;
+      text-shadow: 0 1px rgba(0, 0, 0, .3);
+      font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+      font-size: 1em;
+      text-align: left;
+      white-space: pre;
+      word-spacing: normal;
+      word-break: normal;
+      word-wrap: normal;
+      line-height: 1.5;
+      -moz-tab-size: 4;
+      -o-tab-size: 4;
+      tab-size: 4;
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none
+    }
+
+    pre[class*=language-] {
+      padding: 1em;
+      margin: .5em 0;
+      overflow: auto;
+      border-radius: .3em
+    }
+
+    :not(pre)>code[class*=language-],
+    pre[class*=language-] {
+      background: #272822
+    }
+
+    :not(pre)>code[class*=language-] {
+      padding: .1em;
+      border-radius: .3em;
+      white-space: normal
+    }
+
+    .token.cdata,
+    .token.comment,
+    .token.doctype,
+    .token.prolog {
+      color: #708090
+    }
+
+    .token.punctuation {
+      color: #f8f8f2
+    }
+
+    .namespace {
+      opacity: .7
+    }
+
+    .token.constant,
+    .token.deleted,
+    .token.property,
+    .token.symbol,
+    .token.tag {
+      color: #f92672
+    }
+
+    .token.boolean,
+    .token.number {
+      color: #ae81ff
+    }
+
+    .token.attr-name,
+    .token.builtin,
+    .token.char,
+    .token.inserted,
+    .token.selector,
+    .token.string {
+      color: #a6e22e
+    }
+
+    .language-css .token.string,
+    .style .token.string,
+    .token.entity,
+    .token.operator,
+    .token.url,
+    .token.variable {
+      color: #f8f8f2
+    }
+
+    .token.atrule,
+    .token.attr-value,
+    .token.class-name,
+    .token.function {
+      color: #e6db74
+    }
+
+    .token.keyword {
+      color: #66d9ef
+    }
+
+    .token.important,
+    .token.regex {
+      color: #fd971f
+    }
+
+    .token.bold,
+    .token.important {
+      font-weight: 700
+    }
+
+    .token.italic {
+      font-style: italic
+    }
+
+    .token.entity {
+      cursor: help
+    }
+
+    .nuxt-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      width: 0;
+      opacity: 1;
+      transition: width .1s, opacity .4s;
+      background-color: #8500ff;
+      z-index: 999999
+    }
+
+    .nuxt-progress.nuxt-progress-notransition {
+      transition: none
+    }
+
+    .nuxt-progress-failed {
+      background-color: red
+    }
+
+    .main-container[data-v-eb30b6e6] {
+      padding-top: 100px
+    }
+
+    .main-container.active .contain-wrapper[data-v-eb30b6e6] {
+      padding: 0 0 30px
+    }
+
+    @media (min-width:992px) {
+      .main-container.active .contain-wrapper[data-v-eb30b6e6] {
+        padding: 35px 0 30px
+      }
+    }
+
+    .main-container.active .contain-wrapper>.row[data-v-eb30b6e6] {
+      margin-left: 0;
+      margin-right: 0
+    }
+
+    .main-container.active .contain-wrapper>.row .col-12[data-v-eb30b6e6] {
+      padding-left: 0;
+      padding-right: 0
+    }
+
+    @media (min-width:992px) {
+      .main-container[data-v-eb30b6e6] {
+        display: flex;
+        padding-top: 0
+      }
+    }
+
+    .main-container.active[data-v-eb30b6e6] {
+      padding-top: 50px
+    }
+
+    .side-bar-container[data-v-eb30b6e6] {
+      flex: none;
+      width: 100%
+    }
+
+    @media (max-width:991px) {
+      .side-bar-container[data-v-eb30b6e6] {
+        position: fixed;
+        top: 52px;
+        z-index: 100;
+        background-color: #fff
+      }
+    }
+
+    @media (min-width:992px) {
+      .side-bar-container[data-v-eb30b6e6] {
+        width: 300px;
+        box-shadow: 2px 0 5px -3px rgba(104, 105, 128, .3);
+        padding: 160px 0 0
+      }
+    }
+
+    @media (min-width:1200px) {
+      .side-bar-container[data-v-eb30b6e6] {
+        width: 330px
+      }
+    }
+
+    .contain-wrapper[data-v-eb30b6e6] {
+      width: 100%;
+      padding: 25px 15px
+    }
+
+    @media (min-width:992px) {
+      .contain-wrapper[data-v-eb30b6e6] {
+        flex: 1;
+        min-width: 0;
+        padding: 100px 15px 25px
+      }
+    }
+
+    @media (min-width:1200px) {
+      .contain-wrapper[data-v-eb30b6e6] {
+        padding: 100px 30px 30px
+      }
+    }
+
+    @media (min-width:1440px) {
+      .contain-wrapper[data-v-eb30b6e6] {
+        padding: 100px 50px 30px
+      }
+    }
+
+    .l2-navbar .fc_net {
+      background: linear-gradient(42deg, #7acbfb, #7188f7);
+      color: #fff !important;
+      opacity: 1;
+      font-size: 25px
+    }
+
+    .l2-navbar .title-container {
+      display: flex
+    }
+
+    .l2-navbar .dropdown-item {
+      padding: 1.4rem 2.4rem !important
+    }
+
+    .transparent-bg {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 110vh;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, .1);
+      display: none;
+      opacity: .4
+    }
+
+    .transparent-bg.show {
+      display: block
+    }
+
+    .l1 {
+      padding: .2rem 1rem
+    }
+
+    .l1 .navbar-toggler {
+      z-index: 1001
+    }
+
+    @media (max-width:991px) {
+      .l1 .navbar-toggler {
+        margin-top: 1rem;
+        top: 0
+      }
+    }
+
+    .l1 .navbar-toggler-icon {
+      margin-right: -6px
+    }
+
+    @media (max-width:991px) {
+      .l1 {
+        border-bottom: 1px solid #efefef;
+        padding: 0 1rem
+      }
+    }
+
+    @media (min-width:992px) {
+      .l1 {
+        padding: .2rem 4rem
+      }
+    }
+
+    .l1 .navbar-brand {
+      padding: 0
+    }
+
+    .l1 .navbar-brand .fc-logo {
+      width: 115px
+    }
+
+    @media (max-width:991px) {
+      .l1 .navbar-brand {
+        display: none
+      }
+    }
+
+    @media (max-width:991px) {
+      .l1 .btn-link {
+        padding: .5rem 0 !important
+      }
+    }
+
+    .l2 {
+      padding: .5rem 4rem
+    }
+
+    @media (max-width:991px) {
+      .l2 {
+        top: 0 !important
+      }
+    }
+
+    #toggleButton {
+      margin-right: 7px
+    }
+
+    @media only screen and (max-width:992px) {
+      .navbar-collapse {
+        left: auto;
+        top: -5px
+      }
+
+      .navbar-collapse:after,
+      .navbar-collapse:before {
+        display: none
+      }
+    }
+
+    .navbar-collapse .navbar-nav {
+      padding-right: 0 !important
+    }
+
+    .version .dropdown-menu {
+      left: -74%
+    }
+
+    .bg-light {
+      background-color: #fff !important
+    }
+
+    .dropdown-item.active,
+    .dropdown-item:active {
+      background: #fff
+    }
+
+    .l1 {
+      z-index: 1000
+    }
+
+    .l1 .navbar-nav {
+      font-size: 14px;
+      font-size: 1.4rem
+    }
+
+    @media only screen and (max-width:991px) {
+      .l1 .navbar-nav {
+        max-height: 80vh;
+        overflow: auto
+      }
+    }
+
+    .l1 .navbar-nav .dropdown-menu {
+      left: -75%
+    }
+
+    @media (min-width:992px) {
+      .l1 .navbar-nav .nav-col-2 .dropdown-menu {
+        left: -182%
+      }
+    }
+
+    @media (min-width:992px) {
+      .l1 .navbar-nav .nav-col-3 .dropdown-menu {
+        left: -190%
+      }
+    }
+
+    .l1 .btn {
+      font-size: 14px;
+      font-size: 1.4rem;
+      padding: .5rem 1.55rem;
+      margin-top: 2px;
+      text-transform: capitalize;
+      color: rgba(49, 49, 49, .6)
+    }
+
+    .l1 .btn:hover {
+      color: rgba(49, 49, 49, .9)
+    }
+
+    .l1 .btn.custom-btn {
+      font-size: 13px;
+      font-size: 1.3rem;
+      margin-top: 3px;
+      text-transform: uppercase;
+      color: #fff
+    }
+
+    .l1 .btn.custom-btn:hover {
+      color: #fff
+    }
+
+    .l1 #nav_collapse {
+      box-shadow: none;
+      border: none
+    }
+
+    .l1 #nav_collapse:after,
+    .l1 #nav_collapse:before {
+      display: none
+    }
+
+    .l2 {
+      padding: 1rem;
+      top: 37px;
+      z-index: 999;
+      border: 1px solid #efefef;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .04)
+    }
+
+    @media (max-width:320px) {
+      .l2 .l2-version {
+        display: none !important
+      }
+    }
+
+    @media (min-width:992px) {
+      .l2 {
+        padding: 1rem 4rem;
+        top: 44px
+      }
+    }
+
+    .l2 .dropdown-menu {
+      position: absolute;
+      max-width: 16rem;
+      left: 0
+    }
+
+    .l2 .dropdown-menu .dropdown-item {
+      transition: all .05s ease
+    }
+
+    .l2 .dropdown-menu .dropdown-item .link-info-wrapper {
+      margin-bottom: 0
+    }
+
+    .l2 .dropdown-menu .dropdown-item:hover {
+      background: rgba(62, 57, 107, .03);
+      color: #6957da;
+      transition: all .05s ease
+    }
+
+    .l2 .dropdown-menu .dropdown-item a:hover {
+      text-decoration: none
+    }
+
+    .l2 .dropdown-menu a.dropdown-item {
+      min-width: 150px !important
+    }
+
+    .l2 .dropdown-menu .dropdown-menu-wrapper {
+      max-height: 70vh;
+      overflow: auto
+    }
+
+    .l2 .nav-col-2 .dropdown-menu {
+      min-width: 36rem
+    }
+
+    .l2 .dev-center-title {
+      font-size: 1.6rem;
+      font-weight: 600
+    }
+
+    @media (max-width:556px) {
+      .l2 .dev-center-title {
+        font-size: 1.4rem;
+        color: #9f9fb9
+      }
+    }
+
+    .l2 .navbar-nav {
+      display: inline-block;
+      vertical-align: middle
+    }
+
+    @media (max-width:556px) {
+      .l2 .navbar-nav {
+        display: block;
+        position: absolute;
+        left: 32px;
+        top: 20px
+      }
+
+      .l2 .navbar-nav li>a {
+        padding: 0 !important;
+        font-size: 1.4rem
+      }
+    }
+
+    @media (min-width:557px) {
+      .l2 .navbar-nav:before {
+        content: "/";
+        width: 2px;
+        height: auto;
+        float: left;
+        margin-left: 8px;
+        margin-top: 4px;
+        color: #ccc
+      }
+    }
+
+    .l2 .navbar-nav li {
+      float: left;
+      margin-left: 20px
+    }
+
+    .l2 .navbar-nav li:first-child {
+      margin-left: 10px
+    }
+
+    .l2 .navbar-nav li .nav-link {
+      padding: .5rem 0
+    }
+
+    .l2 .navbar-nav .nav-item .dropdown-menu {
+      -ms-transform: translateY(0);
+      display: block;
+      opacity: 0;
+      top: -10000px !important;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      border: 1px solid rgba(49, 49, 49, .06);
+      box-shadow: 0 3px 18px 0 rgba(67, 68, 86, .1);
+      padding: 1rem 0
+    }
+
+    .l2 .navbar-nav .nav-item .dropdown-menu:after,
+    .l2 .navbar-nav .nav-item .dropdown-menu:before {
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      content: "";
+      display: block;
+      height: 0;
+      left: 6%;
+      position: absolute;
+      width: 0;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%)
+    }
+
+    .l2 .navbar-nav .nav-item .dropdown-menu:after {
+      border-bottom: 8px solid #cbcbd9;
+      top: -8px;
+      z-index: 998
+    }
+
+    .l2 .navbar-nav .nav-item .dropdown-menu a.dropdown-item {
+      padding: 1rem 2.4rem
+    }
+
+    .l2 .navbar-nav .nav-item .dropdown-menu a.dropdown-item:hover {
+      background: rgba(62, 57, 107, .03);
+      border: none !important;
+      box-shadow: none !important;
+      color: #6957da;
+      position: relative;
+      transition: all .05s ease
+    }
+
+    .l2 .navbar-nav .nav-item:hover>.dropdown-menu {
+      display: block;
+      -ms-transform: translateY(-5px) !important;
+      opacity: 1;
+      top: auto !important;
+      -webkit-transform: translateY(-5px) !important;
+      transform: translateY(-5px) !important;
+      transition: opacity .4s ease-in-out, -webkit-transform .4s ease-in-out;
+      transition: transform .4s ease-in-out, opacity .4s ease-in-out;
+      transition: transform .4s ease-in-out, opacity .4s ease-in-out, -webkit-transform .4s ease-in-out
+    }
+
+    .l2 .menu-wrapper {
+      height: 40vh;
+      max-height: 320px;
+      overflow: auto
+    }
+
+    @media (max-width:800px) {
+      .l2 .logo-nav-wrapper {
+        width: 100%
+      }
+    }
+
+    .dev-logo {
+      display: inline-block;
+      vertical-align: middle;
+      color: #434456;
+      margin-left: -4px
+    }
+
+    .dev-logo:hover {
+      text-decoration: none;
+      color: #434456
+    }
+
+    .dev-logo i {
+      font-size: 30px;
+      line-height: 1;
+      color: #5a5b75
+    }
+
+    .dev-logo .dev-center-title,
+    .dev-logo .fc_dev_center {
+      display: inline-block;
+      vertical-align: middle;
+      transition: top .35s ease
+    }
+
+    .dev-logo .dev-center-title {
+      position: relative;
+      top: -1px;
+      left: 3px
+    }
+
+    @media (max-width:556px) {
+      .dev-logo .dev-center-title {
+        top: 0
+      }
+
+      .dev-logo .dev-center-title.active {
+        top: -9px
+      }
+    }
+
+    .general-search {
+      position: relative;
+      margin-left: 1.6rem;
+      display: inline-block;
+      vertical-align: middle
+    }
+
+    @media (max-width:991px) {
+      .general-search {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0 !important;
+        width: 0;
+        z-index: 1;
+        transition: width .02s
+      }
+
+      .general-search.show {
+        width: 100%;
+        transition: width .12s ease
+      }
+
+      .general-search.show:before {
+        -webkit-font-smoothing: antialiased;
+        font-family: fusion-icon !important;
+        font-style: normal;
+        -webkit-font-feature-settings: normal;
+        font-feature-settings: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 1;
+        text-transform: none;
+        content: "\E317";
+        position: absolute;
+        z-index: 1000;
+        padding: 16px;
+        cursor: pointer
+      }
+
+      .general-search .algolia-autocomplete {
+        width: 100%;
+        padding: 10px 75px 10px 45px;
+        background-color: #fff
+      }
+    }
+
+    .general-search .form-control {
+      height: 32px;
+      width: 100%;
+      border: 1px solid rgba(62, 57, 107, .13);
+      border-radius: 4px;
+      background-color: #f8f9fd;
+      padding: .5rem 3rem .5rem 1rem
+    }
+
+    @media (min-width:992px) {
+      .general-search .form-control {
+        width: 374px
+      }
+    }
+
+    .general-search i {
+      font-size: 1.5rem;
+      width: 41px;
+      color: #c6c6ce;
+      position: absolute;
+      z-index: 1;
+      right: 36px;
+      top: 7px;
+      padding: 10px 9px 10px 14px;
+      cursor: pointer
+    }
+
+    @media (min-width:992px) {
+      .general-search i {
+        font-size: 1.2rem;
+        background-color: #6957da;
+        color: #fff;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        right: 0;
+        top: 0;
+        cursor: auto
+      }
+    }
+
+    .dev-navbar {
+      list-style: none;
+      padding: 0;
+      margin: 0
+    }
+
+    .dev-navbar:after {
+      content: "";
+      display: table;
+      clear: both
+    }
+
+    .dev-navbar li {
+      float: left
+    }
+
+    .dev-navbar li .dropdown button {
+      border: none;
+      background: transparent;
+      padding: 0
+    }
+
+    .ds-dataset-1 {
+      height: 70vh;
+      overflow: auto
+    }
+
+    #algoliaSearch::-webkit-input-placeholder {
+      color: #9f9fb9
+    }
+
+    #algoliaSearch:-ms-input-placeholder {
+      color: #9f9fb9
+    }
+
+    #algoliaSearch::-ms-input-placeholder {
+      color: #9f9fb9
+    }
+
+    #algoliaSearch::placeholder {
+      color: #9f9fb9
+    }
+
+    @media (max-width:768px) {
+      .algolia-autocomplete .algolia-docsearch-suggestion .algolia-docsearch-suggestion--subcategory-column {
+        display: block;
+        float: left;
+        width: 30%;
+        text-align: right;
+        position: relative;
+        padding: 5.33333px 10.66667px;
+        color: #a4a7ae;
+        font-size: .9em;
+        word-wrap: break-word
+      }
+
+      .algolia-autocomplete .algolia-docsearch-suggestion .algolia-docsearch-suggestion--content {
+        display: block;
+        float: right;
+        width: 70%;
+        position: relative;
+        padding: 5.33333px 0 5.33333px 10.66667px;
+        cursor: pointer
+      }
+    }
+
+    .algolia-autocomplete .ds-dropdown-menu {
+      max-width: 90vw;
+      min-width: 90vw
+    }
+
+    @media (min-width:768px) {
+      .algolia-autocomplete .ds-dropdown-menu {
+        max-width: 600px;
+        min-width: 500px
+      }
+    }
+
+    .algolia-autocomplete .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion:not(.suggestion-layout-simple) .algolia-docsearch-suggestion--content {
+      background-color: transparent
+    }
+
+    .algolia-autocomplete .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion:not(.suggestion-layout-simple) .algolia-docsearch-suggestion--content .algolia-docsearch-suggestion--title {
+      font-weight: 400;
+      color: #177f79
+    }
+
+    .algolia-autocomplete .algolia-docsearch-suggestion--text .algolia-docsearch-suggestion--highlight {
+      box-shadow: inset 0 -2px 0 0 rgba(23, 127, 121, .8)
+    }
+
+    .algolia-autocomplete .algolia-docsearch-suggestion--content:before,
+    .algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column:before {
+      display: none
+    }
+
+    .algolia-autocomplete .algolia-docsearch-suggestion--category-header {
+      font-weight: 600;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(74, 74, 74, .1)
+    }
+
+    .algolia-autocomplete .algolia-docsearch-suggestion--title {
+      font-weight: 400
+    }
+
+    .algolia-autocomplete .algolia-docsearch-suggestion--highlight {
+      color: #177f79;
+      background: rgba(23, 127, 121, .1)
+    }
+
+    @media (max-width:991.98px) {
+      .l1 .navbar-nav .nav-item .dropdown-toggle:after {
+        margin-top: 8px
+      }
+    }
+
+    @media (min-width:992px) {
+      .navbar-expand-lg .navbar-collapse {
+        padding: 0
+      }
+    }
+
+    .tree-container {
+      padding-left: 0
+    }
+
+    .tree-container .first-branch {
+      border: none;
+      padding-bottom: 0
+    }
+
+    .tree-container .first-branch>.fc-tree-leaf-content {
+      padding: 10px 0;
+      border-bottom: 1px solid #efefef
+    }
+
+    .sidebar-main-container {
+      height: 100%
+    }
+
+    .sidebar-main-container .mob-view {
+      display: none;
+      height: 50px;
+      width: 100%;
+      box-shadow: 0 8px 10px 0 rgba(62, 57, 107, .04);
+      padding: 0 10px;
+      cursor: pointer
+    }
+
+    .sidebar-main-container .mob-view .mob-view-content {
+      color: #434456;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .2px;
+      line-height: 18px;
+      display: block;
+      margin-top: -4px
+    }
+
+    .sidebar-main-container .mob-view .placeholder {
+      color: #9f9fb9;
+      font-size: 12px;
+      letter-spacing: -.1px;
+      line-height: 15px
+    }
+
+    .sidebar-main-container .toc-holder-child {
+      position: relative
+    }
+
+    .sidebar-main-container .mob-view-bg {
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, .3);
+      display: none;
+      z-index: 11;
+      background-color: rgba(0, 0, 0, .3)
+    }
+
+    @media only screen and (max-width:992px) {
+      .sidebar-main-container .mob-view {
+        display: block;
+        position: relative
+      }
+
+      .sidebar-main-container .mob-view .fc_keyboard_arrow_right {
+        float: right;
+        margin-right: 0;
+        font-size: 25px;
+        margin-top: -27px;
+        opacity: .3;
+        transition: all .09s
+      }
+
+      .sidebar-main-container .mob-view.active .fc_keyboard_arrow_right {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+        transition: all .09s
+      }
+
+      .sidebar-main-container .toc-holder {
+        margin-top: 10px;
+        display: block;
+        opacity: 0
+      }
+
+      .sidebar-main-container .toc-holder-set {
+        position: absolute;
+        width: 100%
+      }
+
+      .sidebar-main-container .toc-holder-set-child {
+        width: 94%;
+        margin: 0 auto;
+        background: #fff;
+        position: relative;
+        z-index: 99;
+        border-radius: 4px;
+        overflow: hidden
+      }
+
+      .sidebar-main-container .toc-holder:before {
+        border-bottom: 8px solid #fff;
+        top: 53px;
+        z-index: 999
+      }
+
+      .sidebar-main-container .toc-holder:after,
+      .sidebar-main-container .toc-holder:before {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        content: "";
+        display: block;
+        height: 0;
+        left: 28px;
+        position: absolute;
+        width: 0
+      }
+
+      .sidebar-main-container .toc-holder:after {
+        top: 52px;
+        z-index: 998;
+        border-bottom: 8px solid rgba(49, 49, 49, .1)
+      }
+
+      .sidebar-main-container .toc-holder .first-branch {
+        padding-left: 20px
+      }
+
+      .sidebar-main-container .tree-container {
+        padding-left: 0;
+        padding-top: 5px
+      }
+
+      .sidebar-main-container .mob-view-bg {
+        display: block;
+        position: absolute;
+        top: 50px
+      }
+
+      .sidebar-main-container .sidebar-container {
+        border-radius: 8px
+      }
+    }
+
+    .sidebar-container {
+      height: 74vh;
+      overflow-y: auto;
+      position: relative;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    .sidebar-container li {
+      list-style: none
+    }
+
+    .title-container {
+      transition: all 1s ease;
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -o-transition: all 1s ease
+    }
+
+    .title-container .fc-tree-leaf-text {
+      color: #686980
+    }
+
+    .title-container,
+    .title-container.i {
+      padding: 7px 0;
+      color: #686980;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .2px;
+      line-height: 18px
+    }
+
+    .title-container.active .fc-tree-leaf-text,
+    .title-container:hover .fc-tree-leaf-text {
+      color: #5a5b75;
+      font-weight: 600
+    }
+
+    .lvl-0 .title-container {
+      font-weight: 600;
+      color: #686980
+    }
+
+    .lvl-1 .title-container {
+      font-weight: 400;
+      color: #5a5b75
+    }
+
+    .tree-child-leaves {
+      margin-left: 20px
+    }
+
+    .title-container {
+      padding-right: 20px;
+      text-decoration: none !important
+    }
+
+    .title-container.active {
+      border-right: 3px solid #16d3c0;
+      color: #212344
+    }
+
+    .tree-main-container {
+      position: relative;
+      height: 85vh;
+      overflow-y: auto
+    }
+
+    .fc-tree-leaf .fc-tree-leaf-text,
+    .tree-view .fc-tree-leaf-text {
+      width: auto !important
+    }
+
+    .tree-badge {
+      margin-left: 7px;
+      padding: 3px 5px;
+      float: left
+    }
+
+    .tree-container>ul:last-child .first-branch {
+      border: none
+    }
+
+    @media only screen and (max-width:800px) {
+
+      .fc-tree-leaf .tree-expando,
+      .tree-view .tree-expando {
+        transition: all .3s
+      }
+    }
+
+    .grad-bg {
+      position: relative;
+      height: 50px;
+      width: 100%;
+      margin-top: -33px;
+      z-index: 99;
+      background: -webkit-linear-gradient(top, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .8) 30%, #fff 70%)
+    }
+
+    .custom-badge {
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .17px;
+      line-height: 12px;
+      color: #fff;
+      padding: 8px 10px;
+      margin: 1.6rem 0 !important
+    }
+
+    .custom-badge-fixes {
+      background-color: #48b884
+    }
+
+    .custom-badge-improvements {
+      background-color: #3cbae8
+    }
+
+    .custom-badge-newfeature {
+      background-color: #e1a434
+    }
+
+    .custom-badge-deprecated {
+      background-color: #f87e7c
+    }
+
+    .vue-container #parent-sidebar-wrapper {
+      display: none
+    }
+
+    .vue-container #parent-sidebar-wrapper.show {
+      display: block
+    }
+
+    @media only screen and (max-width:992px) {
+      .vue-container #parent-sidebar-wrapper.show {
+        display: none
+      }
+    }
+
+    .vue-container aside {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      height: 100%
+    }
+
+    .vue-container aside .overview {
+      display: block;
+      color: #8786a4;
+      text-transform: uppercase;
+      padding-left: 1.4rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: .2px;
+      line-height: 2rem;
+      margin-bottom: 2.4rem
+    }
+
+    .vue-container .ul-pocContainer {
+      display: flex;
+      flex-direction: column;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      max-height: 75vh;
+      overflow: auto
+    }
+
+    .vue-container .ul-pocContainer li {
+      padding: 0;
+      margin-bottom: 0 !important
+    }
+
+    .vue-container .ul-pocContainer li a {
+      padding: 0;
+      font-weight: 400;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      color: #868e96;
+      text-decoration: none;
+      transition: all .15s ease
+    }
+
+    .vue-container .ul-pocContainer li a.active {
+      color: #39393a;
+      font-weight: 500
+    }
+
+    .vue-container .parent-sidebar-wrapper {
+      border-left: 1px solid rgba(62, 57, 107, .09)
+    }
+
+    .vue-container .version-sub-head {
+      margin: 50px 0 0
+    }
+
+    .vue-container .first-sub-head {
+      margin: 40px 0 0
+    }
+
+    .vue-container .release-date {
+      color: #8786a4;
+      margin-bottom: 8px
+    }
+
+    .top-border[data-v-88a42bb8] {
+      border-top: 1px solid rgba(62, 57, 107, .13);
+      margin-top: 38px;
+      opacity: .3
+    }
+
+    .feedback-form-wrapper[data-v-88a42bb8] {
+      background: linear-gradient(180deg, #f7fafc, #fcfdfe 6.71%, #fff);
+      box-shadow: 0 8px 10px 0 rgba(62, 57, 107, .02);
+      padding: 27px 15px;
+      margin-top: 30px
+    }
+
+    .feedback-form-wrapper .profile .profile-pic[data-v-88a42bb8] {
+      width: 122px;
+      height: 122px;
+      border-radius: 50%;
+      border: 2px solid rgba(62, 57, 107, .04);
+      margin: 0
+    }
+
+    .feedback-form-wrapper .article[data-v-88a42bb8] {
+      position: relative
+    }
+
+    @media screen and (min-width:320px) {
+      .feedback-form-wrapper .article[data-v-88a42bb8] {
+        margin-top: 27px
+      }
+    }
+
+    @media screen and (min-width:436px) {
+      .feedback-form-wrapper .article[data-v-88a42bb8] {
+        text-align: center
+      }
+    }
+
+    @media screen and (min-width:800px) {
+      .feedback-form-wrapper .article[data-v-88a42bb8] {
+        text-align: left;
+        text-align: initial;
+        margin-top: 0
+      }
+    }
+
+    @media screen and (min-width:992px) {
+      .feedback-form-wrapper .article[data-v-88a42bb8] {
+        margin-top: 27px;
+        text-align: center
+      }
+    }
+
+    @media screen and (min-width:1200px) {
+      .feedback-form-wrapper .article[data-v-88a42bb8] {
+        text-align: left;
+        text-align: initial;
+        margin-top: 0
+      }
+    }
+
+    .feedback-form-wrapper .article h4[data-v-88a42bb8] {
+      margin: 0;
+      color: #313131;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 23px;
+      padding: 3px 0
+    }
+
+    .feedback-form-wrapper .article p[data-v-88a42bb8] {
+      margin: 0;
+      color: #73748c;
+      line-height: 27px;
+      padding: 3px 0
+    }
+
+    .feedback-form-wrapper .article .feedback-message[data-v-88a42bb8] {
+      color: #313131;
+      font-size: 18px;
+      line-height: 23px
+    }
+
+    @media screen and (min-width:300px) {
+      .feedback-form-wrapper .article .radio-buttons-section[data-v-88a42bb8] {
+        margin-top: 20px
+      }
+    }
+
+    @media screen and (min-width:800px) {
+      .feedback-form-wrapper .article .radio-buttons-section[data-v-88a42bb8] {
+        position: absolute;
+        bottom: 0;
+        margin-top: 0
+      }
+    }
+
+    @media screen and (min-width:992px) {
+      .feedback-form-wrapper .article .radio-buttons-section[data-v-88a42bb8] {
+        position: static;
+        bottom: unset;
+        margin-top: 20px
+      }
+    }
+
+    @media screen and (min-width:1200px) {
+      .feedback-form-wrapper .article .radio-buttons-section[data-v-88a42bb8] {
+        margin-top: 0;
+        position: absolute;
+        bottom: 0
+      }
+    }
+
+    @media screen and (min-width:1417px) {
+      .feedback-form-wrapper .article .radio-buttons-section[data-v-88a42bb8] {
+        position: static;
+        margin-top: 11px
+      }
+    }
+
+    .feedback-form-wrapper .article .radio-buttons-section .radio-button-wrap[data-v-88a42bb8] {
+      display: inline-block;
+      margin-right: 16px
+    }
+
+    .feedback-form-wrapper .article .radio-buttons-section .radio-button-wrap input[type=radio][data-v-88a42bb8] {
+      position: absolute;
+      left: -9999px
+    }
+
+    .feedback-form-wrapper .article .radio-buttons-section .radio-button-wrap input[type=radio]+label[data-v-88a42bb8] {
+      position: relative;
+      padding-left: 25px;
+      cursor: pointer;
+      margin: 0;
+      line-height: 18px
+    }
+
+    .feedback-form-wrapper .article .radio-buttons-section .radio-button-wrap input[type=radio]+label[data-v-88a42bb8]:before {
+      content: "";
+      height: 18px;
+      width: 18px;
+      border: 2px solid #48b884;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0
+    }
+
+    .feedback-form-wrapper .article .radio-buttons-section .radio-button-wrap input[type=radio]+label[data-v-88a42bb8]:after {
+      content: "";
+      height: 11.9px;
+      width: 11.9px;
+      background-color: #48b884;
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      opacity: 0;
+      border-radius: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      transition: all .7s ease
+    }
+
+    .feedback-form-wrapper .article .radio-buttons-section .radio-button-wrap input[type=radio]:checked+label[data-v-88a42bb8]:after {
+      opacity: 1
+    }
+
+    .feedback-form-wrapper .only-feedbackform-wrap[data-v-88a42bb8] {
+      margin-top: 26px;
+      border-top: 1px solid hsla(0, 0%, 59.2%, .1)
+    }
+
+    .feedback-form-wrapper .only-feedbackform-wrap p[data-v-88a42bb8] {
+      margin-top: 25px;
+      margin-bottom: 0;
+      color: #313131;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px
+    }
+
+    .feedback-form-wrapper .only-feedbackform-wrap .feedback-section[data-v-88a42bb8] {
+      margin-top: 8px
+    }
+
+    .feedback-form-wrapper .only-feedbackform-wrap .feedback-section .base-dropdown[data-v-88a42bb8] {
+      height: 47px;
+      border: 1px solid #dadae4
+    }
+
+    .feedback-form-wrapper .only-feedbackform-wrap .feedback-section .form-email[data-v-88a42bb8] {
+      box-shadow: none;
+      border: 1px solid rgba(104, 105, 128, .22)
+    }
+
+    .feedback-form-wrapper .only-feedbackform-wrap .feedback-section .form-email[data-v-88a42bb8]:-webkit-autofill {
+      transition: background-color 5000s ease-in-out 0s
+    }
+
+    .feedback-form-wrapper .only-feedbackform-wrap .description-section .form-message[data-v-88a42bb8] {
+      resize: none;
+      height: 105px;
+      box-shadow: none;
+      border: 1px solid rgba(104, 105, 128, .22)
+    }
+
+    .feedback-form-wrapper [type=checkbox][data-v-88a42bb8]:checked,
+    .feedback-form-wrapper [type=checkbox][data-v-88a42bb8]:not(:checked) {
+      position: absolute;
+      left: -9999px
+    }
+
+    .feedback-form-wrapper [type=checkbox]:checked+label[data-v-88a42bb8],
+    .feedback-form-wrapper [type=checkbox]:not(:checked)+label[data-v-88a42bb8] {
+      position: relative;
+      padding-left: 28px;
+      line-height: 20px;
+      display: inline-block;
+      color: #666
+    }
+
+    .feedback-form-wrapper [type=checkbox]:checked+label[data-v-88a42bb8]:before,
+    .feedback-form-wrapper [type=checkbox]:not(:checked)+label[data-v-88a42bb8]:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border: 1.74px solid #48b884;
+      border-radius: 1.74px;
+      box-shadow: 0 5px 12px 0 rgba(62, 57, 107, .04)
+    }
+
+    .feedback-form-wrapper [type=checkbox]:checked+label[data-v-88a42bb8]:after,
+    .feedback-form-wrapper [type=checkbox]:not(:checked)+label[data-v-88a42bb8]:after {
+      content: "";
+      width: 10.5px;
+      height: 10.5px;
+      background-color: #48b884;
+      position: absolute;
+      top: 2.5px;
+      left: 2.5px;
+      transition: all .2s ease;
+      border-radius: .87px;
+      box-shadow: 0 5px 12px 0 rgba(62, 57, 107, .04)
+    }
+
+    .feedback-form-wrapper [type=checkbox]:not(:checked)+label[data-v-88a42bb8]:after {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      transform: scale(0)
+    }
+
+    .feedback-form-wrapper [type=checkbox]:checked+label[data-v-88a42bb8]:after {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      transform: scale(1)
+    }
+
+    .feedback-form-wrapper .feedback-submit-section[data-v-88a42bb8] {
+      margin-top: 10px;
+      margin-bottom: 10px
+    }
+
+    .feedback-form-wrapper .feedback-submit-section .btn-primary-grad[data-v-88a42bb8] {
+      padding-top: 9px;
+      padding-bottom: 9px;
+      margin-right: 11.5px
+    }
+
+    .feedback-form-wrapper .feedback-submit-section .btn-primary-grad.active[data-v-88a42bb8] {
+      width: 155px
+    }
+
+    .feedback-form-wrapper .feedback-submit-section .btn-outline-dark[data-v-88a42bb8] {
+      border: 1px solid rgba(74, 74, 74, .2);
+      padding-top: 8px;
+      padding-bottom: 8px;
+      color: #4a4a4a
+    }
+
+    .feedback-form-wrapper .feedback-submit-section .btn-outline-dark[data-v-88a42bb8]:hover {
+      color: #fff
+    }
+
+    .feedback-form-wrapper .label-overlay[data-v-88a42bb8] {
+      font-size: 16px
+    }
+
+    .share-container {
+      margin-bottom: 80px
+    }
+
+    .share-container h3 {
+      padding-bottom: 18px;
+      color: #212344;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 23px
+    }
+
+    .share-container .icon-container {
+      display: flex;
+      align-items: center
+    }
+
+    .share-container .icon-container .icons {
+      padding-left: 2px;
+      font-size: 25px;
+      box-shadow: 0 0 7px 0 rgba(74, 74, 74, .08);
+      border: 1px solid rgba(74, 74, 74, .05);
+      border-radius: 50%;
+      margin-right: 13px;
+      height: 45px;
+      width: 45px;
+      color: #a4a4a4;
+      text-align: center;
+      line-height: 44px;
+      cursor: pointer;
+      transition: all .35s ease;
+      background: #fff
+    }
+
+    .share-container .icon-container .icons:hover {
+      box-shadow: 0 0 9px #ced4da;
+      color: #2cc7c0
+    }
+
+    .invalid-feedback[data-v-31a4504c],
+    .valid-feedback[data-v-31a4504c] {
+      position: absolute;
+      top: 45px
+    }
+
+    #input_email[data-v-31a4504c] {
+      border: 1px solid #434456;
+      color: #9f9fb9;
+      background: transparent
+    }
+
+    #subscribe-btn.active[data-v-31a4504c] {
+      text-indent: 180%
+    }
+
+    .successmessage[data-v-31a4504c] {
+      text-align: -webkit-center;
+      color: #fff
+    }
+  </style>
+</head>
+
+<body data-n-head="">
+  <div data-server-rendered="true" id="__nuxt">
+    <div id="__layout">
+      <div data-v-eb30b6e6>
+        <header data-v-eb30b6e6>
+          <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light l1"><span itemscope="itemscope"
+              itemtype="http://schema.org/Organization"><a href="https://www.fusioncharts.com" itemprop="url"
+                class="navbar-brand"><img src="/dev/_nuxt/img/d427d93.svg" alt="FusionCharts" itemprop="logo"
+                  width="140" height="auto" class="fc-logo"></a></span> <button id="toggleButton" type="button"
+              data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation" aria-haspopup="true" class="navbar-toggler"><span
+                class="navbar-toggler-icon"></span></button>
+            <div class="transparent-bg"></div>
+            <div id="nav_collapse" aria-labelledby="toggleButton" class="navbar-collapse collapse dropdown-menu">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item b-nav-dropdown dropdown nav-col-2 Explore"><a id href="#" aria-haspopup="true"
+                    aria-expanded="false" class="nav-link dropdown-toggle"><span>Products</span></a>
+                  <div class="dropdown-menu dropdown-menu-left">
+                    <div class="dropdown-item item0">
+                      <div><i class="fc_fusioncharts_xt"></i>
+                        <div class="link-info-wrapper"><span>FusionCharts Suite XT</span> <span class="info small">Plot
+                            95+ charts and 1400+ data-driven maps</span></div>
+                      </div>
+                      <ul class="subnav-links">
+                        <li><a href="/charts" target="_self" class="active"><span>Chart Gallery</span></a></li>
+                        <li><a href="/features" target="_self"><span>Feature Gallery</span></a></li>
+                        <li><a href="/fusionmaps" target="_self"><span>Map Gallery</span></a></li>
+                        <li><a href="/dashboards" target="_self"><span>Dashboards</span></a></li>
+                        <li><a href="/datastories" target="_self"><span>Data Stories</span></a></li>
+                        <li><a href="/integrations" target="_self"><span>Integrations</span></a></li>
+                      </ul>
+                    </div>
+                    <div class="dropdown-item item1">
+                      <div><i class="fc_fusiontime"></i>
+                        <div class="link-info-wrapper"><span>
+                            FusionTime
+                          </span> <span class="info small">Plot high performance time-series visualizations</span></div>
+                      </div>
+                      <ul class="subnav-links">
+                        <li><a href="/fusiontime" target="_self"><span>Learn More</span></a></li>
+                        <li><a href="/fusiontime/examples" target="_self"><span>Examples</span></a></li>
+                        <li><a href="download/fusiontime" target="_self"><span>Download</span></a></li>
+                      </ul>
+                    </div>
+                    <div class="dropdown-item item2">
+                      <div><i class="fc_fusionexport"></i>
+                        <div class="link-info-wrapper"><span>FusionExport</span> <span class="info small">Export full
+                            Dashboards as PDFs for use in reports and emails</span></div>
+                      </div>
+                      <ul class="subnav-links">
+                        <li><a href="/fusionexport" target="_self"><span>Learn More</span></a></li>
+                        <li><a
+                            href="https://www.fusioncharts.com/demos/dashboards/wealth-management-dashboard-with-export/"><span>Demo</span></a>
+                        </li>
+                        <li><a href="/download/fusionexport" target="_self"><span>Download</span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item b-nav-dropdown dropdown nav-col-3"><a id href="#" aria-haspopup="true"
+                    aria-expanded="false" class="nav-link dropdown-toggle"><span>Developer</span></a>
+                  <div class="dropdown-menu dropdown-menu-left">
+                    <div class="dropdown-item item0">
+                      <div><i class="fcnavicon fc_dev_center"></i>
+                        <div class="link-info-wrapper"><span>Dev Center (Docs)</span> <span
+                            class="info small">Documentation for FusionCharts, FusionTime and FusionExport</span></div>
+                      </div>
+                      <ul class="subnav-links">
+                        <li><a href="https://www.fusioncharts.com/dev/fusioncharts" target="_self"><span><i
+                                class="fcnavicon fc_fusioncharts_xt"></i>FusionCharts Suite XT
+                            </span></a></li>
+                        <li><a href="https://www.fusioncharts.com/dev/exporting-charts/using-fusionexport/overview"
+                            target="_self"><span><i class="fcnavicon fc_fusionexport"></i>FusionExport
+                            </span></a></li>
+                        <li><a href="https://www.fusioncharts.com/dev/fusiontime/getting-started/how-fusion-time-works"
+                            target="_self"><span><i class="fcnavicon fc_fusiontime"></i>FusionTime
+                            </span></a></li>
+                      </ul>
+                    </div>
+                    <div class="dropdown-item item1">
+                      <div><i class="fcnavicon fc_integrate"></i>
+                        <div class="link-info-wrapper"><span>Integrations</span> <span class="info small">Get started
+                            quickly with our frontend and backend plugins</span></div>
+                      </div>
+                      <ul class="subnav-links">
+                        <li><span class="badge">Front-end</span>
+                          <ul>
+                            <li><a href="https://www.fusioncharts.com/angular-js-charts"><span><i
+                                    class="fcnavicon fc_Angular"></i>AngularJS
+                                </span></a></li>
+                            <li><a href="https://www.fusioncharts.com/react-charts"><span><i
+                                    class="fcnavicon fc_React"></i> React
+                                </span></a></li>
+                            <li><a href="https://www.fusioncharts.com/angular2-js-charts"><span><i
+                                    class="fcnavicon fc_angular_2"></i>Angular
+                                </span></a></li>
+                            <li><a href="https://www.fusioncharts.com/jquery-charts"><span><i
+                                    class="fcnavicon fc_jQuery"></i>jQuery
+                                </span></a></li>
+                            <li><a href="https://www.fusioncharts.com/vue-js-charts"><span><i
+                                    class="fcnavicon fc_vue"></i>Vue
+                                </span></a></li>
+                          </ul>
+                        </li>
+                        <li><span class="badge">Back-end</span>
+                          <ul>
+                            <li><a href="https://www.fusioncharts.com/php-charts"><span><i
+                                    class="fcnavicon fc_php"></i>PHP
+                                </span></a></li>
+                            <li><a href="https://www.fusioncharts.com/asp-net-charts"><span><i
+                                    class="fcnavicon fc_net"></i>ASP.NET
+                                </span></a></li>
+                            <li><a href="https://www.fusioncharts.com/java-charts"><span><i
+                                    class="fcnavicon fc_java"></i>Java
+                                </span></a></li>
+                            <li><a href="https://www.fusioncharts.com/ruby-on-rails-charts"><span><i
+                                    class="fcnavicon fc_ruby_on_rails"></i>Ruby on Rails
+                                </span></a></li>
+                            <li><a href="https://www.fusioncharts.com/django-charts"><span><i
+                                    class="fcnavicon fc_django"></i>Django
+                                </span></a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="dropdown-item item2">
+                      <div><i class="fcnavicon fc_history"></i>
+                        <div class="link-info-wrapper"><span>Version History</span> <span class="info small">Version
+                            history of FusionCharts, FusionTime and FusionExport</span></div>
+                      </div>
+                      <ul class="subnav-links">
+                        <li><a href="https://www.fusioncharts.com/dev/upgrading/change-log"><span><i
+                                class="fcnavicon fc_fusioncharts_xt"></i>FusionCharts Suite XT
+                            </span></a></li>
+                        <li><a
+                            href="https://www.fusioncharts.com/dev/exporting-charts/using-fusionexport/fusionexport-release-notes"><span><i
+                                class="fcnavicon fc_fusionexport"></i>FusionExport
+                            </span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item b-nav-dropdown dropdown"><a id href="#" aria-haspopup="true" aria-expanded="false"
+                    class="nav-link dropdown-toggle"><span>Pricing</span></a>
+                  <div class="dropdown-menu dropdown-menu-left"><a href="https://www.fusioncharts.com/buy"
+                      class="dropdown-item item0"><span>Pricing and Plans</span></a> <a
+                      href="https://www.fusioncharts.com/buy/resellers/" class="dropdown-item item1"><span>Locate a
+                        Reseller</span></a></div>
+                </li>
+                <li class="nav-item b-nav-dropdown dropdown"><a id href="#" aria-haspopup="true" aria-expanded="false"
+                    class="nav-link dropdown-toggle"><span>Resources</span></a>
+                  <div class="dropdown-menu dropdown-menu-left"><a
+                      href="https://www.fusioncharts.com/resources/#white-papers"
+                      class="dropdown-item item0"><span>Whitepapers</span></a> <a
+                      href="https://www.fusioncharts.com/resources/#charting-best-practices"
+                      class="dropdown-item item1"><span>Charting Best Practices</span></a> <a
+                      href="https://www.fusioncharts.com/resources/#chart-primers"
+                      class="dropdown-item item2"><span>Chart Primers</span></a> <a
+                      href="https://www.fusioncharts.com/resources/#dashboard-primers"
+                      class="dropdown-item item3"><span>Dashboard Primers</span></a> <a
+                      href="https://www.fusioncharts.com/resources/#developers"
+                      class="dropdown-item item4"><span>Developers</span></a></div>
+                </li>
+                <li class="nav-item b-nav-dropdown dropdown"><a id href="#" aria-haspopup="true" aria-expanded="false"
+                    class="nav-link dropdown-toggle"><span>Contact</span></a>
+                  <div class="dropdown-menu dropdown-menu-left">
+                    <div><a role="menuitem" href="https://www.fusioncharts.com/contact-sales"
+                        class="dropdown-item">Contact Sales</a> <a role="menuitem"
+                        href="https://www.fusioncharts.com/contact-support" class="dropdown-item">Contact Support</a> <a
+                        href="https://www.fusioncharts.com/contact-us" class="dropdown-item">Contact Us</a> <a
+                        href="https://forum.fusioncharts.com/" target="_blank" class="dropdown-item">Forum</a></div>
+                  </div>
+                </li>
+                <li class="nav-item"><a href="http://puc.fusioncharts.com" itemprop="url" class="btn btn-link">Login</a>
+                </li>
+                <li class="nav-item"><a href="https://www.fusioncharts.com/download"
+                    class="btn btn-primary-grad custom-btn">Download Trial</a></li>
+              </ul>
+            </div>
+          </nav>
+          <nav class="navbar navbar-light fixed-top bg-light l2">
+            <div class="logo-nav-wrapper"><a href="/dev/" class="dev-logo nuxt-link-active"><i
+                  class="fc_dev_center"></i> <span class="dev-center-title active">Dev Centre</span></a>
+              <ul class="navbar-nav">
+                <li class="nav-item b-nav-dropdown dropdown nav-col-2"><a href="/dev/fusioncharts" aria-haspopup="true"
+                    aria-expanded="false" class="nav-link dropdown-toggle"><span>FusionCharts Suite XT</span></a>
+                  <div class="dropdown-menu dropdown-menu-left l2-navbar">
+                    <div class="dropdown-item item0"><a href="/dev/fusioncharts" title="FusionCharts Suite XT"><i
+                          class="fc_fusioncharts_xt"></i>
+                        <div class="link-info-wrapper">
+                          <div class="title-container"><span id="fusioncharts-suite-xt">FusionCharts Suite XT</span>
+                          </div> <span class="info small">Plot 95+ charts and 1400+ data-driven maps</span>
+                        </div>
+                      </a></div>
+                    <div class="dropdown-item item1"><a href="/dev/fusiontime/getting-started/how-fusion-time-works"
+                        title="FusionTime"><i class="fc_fusiontime"></i>
+                        <div class="link-info-wrapper">
+                          <div class="title-container"><span id="fusiontime">FusionTime</span> </div> <span
+                            class="info small">Plot high performance time-series visualizations</span>
+                        </div>
+                      </a></div>
+                    <div class="dropdown-item item2"><a href="/dev/exporting-charts/using-fusionexport/overview"
+                        title="FusionExport"><i class="fc_fusionexport"></i>
+                        <div class="link-info-wrapper">
+                          <div class="title-container"><span id="fusionexport">FusionExport</span> </div> <span
+                            class="info small">Export full Dashboards as PDFs for use in reports and emails</span>
+                        </div>
+                      </a></div>
+                    <div class="dropdown-item item3"><a
+                        href="/dev/fusioncharts-aspnet-visualization/getting-started/overview-of-fusioncharts-net-viz"
+                        title="FusionCharts.NET"><i class="fc_net"></i>
+                        <div class="link-info-wrapper">
+                          <div class="title-container"><span id="fusioncharts.net">FusionCharts.NET</span> </div> <span
+                            class="info small">Charting library for ASP.NET MVC &amp; ASP.NET WebForms</span>
+                        </div>
+                      </a></div>
+                  </div>
+                </li>
+                <li class="nav-item b-nav-dropdown dropdown l2-version"><a href="#" aria-haspopup="true"
+                    aria-expanded="false" class="nav-link dropdown-toggle">v3.14.0-sr.1</a>
+                  <div class="dropdown-menu pb-0">
+                    <div class="dropdown-menu-wrapper"><a href="https://docs.fusioncharts.com/archive/3.14.0/"
+                        class="dropdown-item soft-reload">v3.14.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.5-sr.1/"
+                        class="dropdown-item soft-reload">v3.13.5-sr.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.5/"
+                        class="dropdown-item soft-reload">v3.13.5</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.4/"
+                        class="dropdown-item soft-reload">v3.13.4</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.3-sr.1/"
+                        class="dropdown-item soft-reload">v3.13.3-sr.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.3/"
+                        class="dropdown-item soft-reload">v3.13.3</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.2-sr.1/"
+                        class="dropdown-item soft-reload">v3.13.2-sr.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.2/"
+                        class="dropdown-item soft-reload">v3.13.2</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.1-sr.1/"
+                        class="dropdown-item soft-reload">v3.13.1-sr.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.1/"
+                        class="dropdown-item soft-reload">v3.13.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.13.0/"
+                        class="dropdown-item soft-reload">v3.13.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.12.2/"
+                        class="dropdown-item soft-reload">v3.12.2</a><a
+                        href="https://docs.fusioncharts.com/archive/3.12.1/"
+                        class="dropdown-item soft-reload">v3.12.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.12.0/"
+                        class="dropdown-item soft-reload">v3.12.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.11.3/"
+                        class="dropdown-item soft-reload">v3.11.3</a><a
+                        href="https://docs.fusioncharts.com/archive/3.11.2/"
+                        class="dropdown-item soft-reload">v3.11.2</a><a
+                        href="https://docs.fusioncharts.com/archive/3.11.0/"
+                        class="dropdown-item soft-reload">v3.11.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.10.1/"
+                        class="dropdown-item soft-reload">v3.10.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.10.0/"
+                        class="dropdown-item soft-reload">v3.10.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.9.0/"
+                        class="dropdown-item soft-reload">v3.9.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.8.0/"
+                        class="dropdown-item soft-reload">v3.8.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.7.1/"
+                        class="dropdown-item soft-reload">v3.7.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.7.0/"
+                        class="dropdown-item soft-reload">v3.7.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.6.0/"
+                        class="dropdown-item soft-reload">v3.6.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.5.1/"
+                        class="dropdown-item soft-reload">v3.5.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.5.0/"
+                        class="dropdown-item soft-reload">v3.5.0</a><a
+                        href="https://docs.fusioncharts.com/archive/3.4.1/"
+                        class="dropdown-item soft-reload">v3.4.1</a><a
+                        href="https://docs.fusioncharts.com/archive/3.4.0/" class="dropdown-item soft-reload">v3.4.0</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="search-container general-search"><input id="algoliaSearch" type="text" placeholder="Search"
+                name="search" class="form-control"> <i class="fc_search"></i></div>
+          </nav>
+        </header>
+        <div data-v-eb30b6e6>
+          <div id="root"></div>
+        </div>
+        <footer data-v-449dbc62 data-v-eb30b6e6>
+          <div class="footer-nav grey-angle-bg hidden-xs pt-4 pb-4" data-v-449dbc62>
+            <div class="container" data-v-449dbc62>
+              <div class="row" data-v-449dbc62>
+                <div class="col-12" data-v-449dbc62>
+                  <div class="footer-nav-wrapper" data-v-449dbc62>
+                    <div class="footer-nav-list product-nav-list order-1 order-sm-1 order-md-1" data-v-449dbc62>
+                      <div data-v-449dbc62>
+                        <h5 class="heading text-uppercase" data-v-449dbc62>Explore</h5>
+                        <ul class="list-unstyled" data-v-449dbc62>
+                          <li data-v-449dbc62><a href="/charts" target="self" class="router-link-active"
+                              data-v-449dbc62>Chart Gallery</a></li>
+                          <li data-v-449dbc62><a href="/fusiontime" target="self" data-v-449dbc62>Time-series Charts</a>
+                          </li>
+                          <li data-v-449dbc62><a href="/charts?product=fusionmaps" target="self" data-v-449dbc62>Map
+                              Gallery</a></li>
+                          <li data-v-449dbc62><a href="/datastories" target="self" data-v-449dbc62>Data Stories</a></li>
+                          <li data-v-449dbc62><a href="/dashboards" target="self" data-v-449dbc62>Dashboards</a></li>
+                          <li data-v-449dbc62><a href="/fusionexport" target="self" data-v-449dbc62>FusionExport</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="footer-nav-list product-nav-list order-1 order-sm-1 order-md-1" data-v-449dbc62>
+                      <div data-v-449dbc62>
+                        <h5 class="heading text-uppercase" data-v-449dbc62>Integrations</h5>
+                        <ul class="list-unstyled" data-v-449dbc62>
+                          <li data-v-449dbc62><a href="/angular-js-charts" target="self" data-v-449dbc62>Angular</a>
+                          </li>
+                          <li data-v-449dbc62><a href="/vue-js-charts" target="self" data-v-449dbc62>Vue</a></li>
+                          <li data-v-449dbc62><a href="/react-charts" target="self" data-v-449dbc62>React</a></li>
+                          <li data-v-449dbc62><a href="/jquery-charts" target="self" data-v-449dbc62>jQuery</a></li>
+                          <li data-v-449dbc62><a href="/php-charts" target="self" data-v-449dbc62>PHP</a></li>
+                          <li data-v-449dbc62><a href="/asp-net-charts" target="self" data-v-449dbc62>ASP.NET</a></li>
+                          <li data-v-449dbc62><a href="/integrations" target="self" data-v-449dbc62>Explore all
+                              Integrations</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="footer-nav-list product-nav-list order-1 order-sm-1 order-md-1" data-v-449dbc62>
+                      <div data-v-449dbc62>
+                        <h5 class="heading text-uppercase" data-v-449dbc62>Developers</h5>
+                        <ul class="list-unstyled" data-v-449dbc62>
+                          <li data-v-449dbc62><a target="_blank" href="https://www.fusioncharts.com/dev"
+                              data-v-449dbc62>Dev Center (Docs)</a></li>
+                          <li data-v-449dbc62><a href="/integrations" data-v-449dbc62>Integrations</a></li>
+                          <li data-v-449dbc62><a target="_blank"
+                              href="https://www.fusioncharts.com/dev/upgrading/change-log" data-v-449dbc62>Version
+                              History</a></li>
+                        </ul>
+                      </div>
+                      <div data-v-449dbc62>
+                        <h5 class="heading text-uppercase" data-v-449dbc62>Pricing</h5>
+                        <ul class="list-unstyled" data-v-449dbc62>
+                          <li data-v-449dbc62><a href="/buy" target="self" data-v-449dbc62>Pricing and Plans</a></li>
+                          <li data-v-449dbc62><a href="/buy/resellers/" target="self" data-v-449dbc62>Locate a
+                              Reseller</a></li>
+                          <li data-v-449dbc62><a href="/buy/subscription/o/" target="_blank" data-v-449dbc62>Support And
+                              Upgrades for Older Licenses</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="footer-nav-list product-nav-list order-1 order-sm-1 order-md-1" data-v-449dbc62>
+                      <div data-v-449dbc62>
+                        <h5 class="heading text-uppercase" data-v-449dbc62>Resources</h5>
+                        <ul class="list-unstyled" data-v-449dbc62>
+                          <li data-v-449dbc62><a href="/resources/#whitepapers" target="self"
+                              data-v-449dbc62>Whitepapers</a></li>
+                          <li data-v-449dbc62><a href="/resources/#charting-best-practices" target="self"
+                              data-v-449dbc62>Charting Best Practices</a></li>
+                          <li data-v-449dbc62><a href="/resources/#chart-primers" target="self" data-v-449dbc62>Chart
+                              Primers</a></li>
+                          <li data-v-449dbc62><a href="/resources/#dashboard-primers" target="self"
+                              data-v-449dbc62>Dashboard Primers</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="footer-nav-list product-nav-list order-1 order-sm-1 order-md-1" data-v-449dbc62>
+                      <div data-v-449dbc62>
+                        <h5 class="heading text-uppercase" data-v-449dbc62>Company</h5>
+                        <ul class="list-unstyled" data-v-449dbc62>
+                          <li data-v-449dbc62><a href="/customers" target="self" data-v-449dbc62>Customers</a></li>
+                          <li data-v-449dbc62><a href="/partners" target="self" data-v-449dbc62>Partners</a></li>
+                          <li data-v-449dbc62><a href="/about-us" target="self" data-v-449dbc62>About Us</a></li>
+                          <li data-v-449dbc62><a href="/careers" target="self" data-v-449dbc62>Careers</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom pt-2 pb-4" data-v-449dbc62>
+            <div class="container" data-v-449dbc62>
+              <div class="row" data-v-449dbc62>
+                <div class="col-xs-12 col-sm-12 col-md-7 order-2 order-md-1" data-v-449dbc62>
+                  <ul itemscope="itemscope" itemtype="https://schema.org/Organization"
+                    class="list-inline list-unstyled social-icons social-icons-lg float-left" data-v-449dbc62>
+                    <li class="twitter" data-v-449dbc62><a title="Twitter" itemprop="sameAs" rel="noopener"
+                        href="//www.twitter.com/fusioncharts" target="_blank" data-v-449dbc62><i class="fc_twitter"
+                          data-v-449dbc62></i></a></li>
+                    <li class="linkedin" data-v-449dbc62><a title="LinkedIn" itemprop="sameAs" rel="noopener"
+                        href="//www.linkedin.com/company/fusioncharts/" target="_blank" data-v-449dbc62><i
+                          class="fc_linkedin" data-v-449dbc62></i></a></li>
+                    <li class="github" data-v-449dbc62><a title="GitHub" itemprop="sameAs" rel="noopener"
+                        href="//github.com/fusioncharts/" target="_blank" data-v-449dbc62><i class="fc_github"
+                          data-v-449dbc62></i></a></li>
+                    <li class="blog" data-v-449dbc62><a title="Blog" itemprop="sameAs" rel="noopener"
+                        href="//www.fusioncharts.com/blog/" target="_blank" data-v-449dbc62><i class="fc_rss"
+                          data-v-449dbc62></i></a></li>
+                  </ul>
+                  <div class="small clear-float" data-v-449dbc62>© 2002 - 2019
+                    InfoSoft Global Private Limited. All Rights Reserved.</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 order-1 order-md-2" data-v-449dbc62>
+                  <div class="subcribe-wrapper" data-v-31a4504c data-v-449dbc62>
+                    <form method="post" data-v-31a4504c><label for="input_email" class="mb-1" data-v-31a4504c>Subscribe
+                        to our monthly newsletter</label>
+                      <div class="input-group mb-3" data-v-31a4504c><input id="input_email" type="text"
+                          placeholder="Enter Email address" value="" class="form-control" data-v-31a4504c>
+                        <div class="invalid-feedback" data-v-31a4504c>Please enter valid email.</div>
+                        <div class="valid-feedback" data-v-31a4504c>That sounds good.</div>
+                        <div class="input-group-append" data-v-31a4504c><button id="subscribe-btn" type="submit"
+                            class="btn btn-primary-grad text-uppercase btn-spinner" data-v-31a4504c><span
+                              data-v-31a4504c>GO</span></button></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <script
+    type="fd91ba1a905749ca502457bc-text/javascript">window.__NUXT__=(function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,_,$,aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak,al,am,an,ao,ap,aq,ar,as){return {layout:"default",data:[{}],error:null,state:{sidebar:[{title:A,header:"FusionCharts Suite XT",icon:"fc_fusioncharts_xt",description:"Plot 95+ charts and 1400+ data-driven maps",longDescription:"Learn how to implement FusionCharts XT, FusionWidgets XT, PowerCharts XT and FusionMaps XT",children:[{title:w,path:"\u002Fdev\u002Ffusioncharts"},{title:"Getting Started ",children:[{title:an,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fyour-first-chart-using-plain-javascript"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fyour-first-gauge-using-plain-javascript"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fyour-first-map-using-plain-javascript"}]},{title:d,children:[{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fconfigure-your-chart-using-plain-javascript"},{title:"Adding Drill Down",path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fadd-drill-down-using-plain-javascript"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fadd-annotations-using-plain-javascript"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fexport-charts-using-plain-javascript"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fsetting-data-source-using-url"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fadding-special-characters-using-plain-javascript"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fslice-data-plot-using-custom-api-in-plain-javascript"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fchange-chart-type-using-plain-javascript"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fapply-different-themes-using-plain-javascript"},{title:u,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fpercentage-calculation-using-plain-javascript"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fdynamically-add-chart-event-listener-using-plain-javascript"},{title:t,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fworking-with-events-using-plain-javascript"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Flifecycle-event-using-plain-javascript"},{title:v,path:"\u002Fdev\u002Fgetting-started\u002Fplain-javascript\u002Fspecial-events-using-plain-javascript"}]}]}]},{title:"Angular",children:[{title:"AngularJS (v1.x)",children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fyour-first-chart-using-angularjs"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fyour-first-gauge-using-angularjs"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fyour-first-map-using-angularjs"}]},{title:d,children:[{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fconfigure-your-chart-using-angularjs"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fadd-drill-down-using-angularjs"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fadd-annotations-using-angularjs"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fexport-charts-using-angularjs"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fsetting-data-source-using-url-in-angularjs"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fadding-special-characters-using-angularjs"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fslice-data-plot-using-custom-api-in-angularjs"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fchange-chart-type-using-angularjs"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fapply-different-themes-using-angularjs"},{title:u,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fpercentage-calculation-using-angularjs"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fdynamically-add-chart-event-listener-using-angularjs"},{title:t,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fworking-with-events-using-angularjs"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Flifecycle-event-using-angularjs"},{title:v,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fspecial-events-using-angularjs"}]}]}]},{title:"Angular (v2.x & Above)",children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fyour-first-chart-using-angular"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fyour-first-gauge-using-angular"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fyour-first-map-using-angular"}]},{title:d,children:[{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fconfigure-your-chart-using-angular"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fadd-drill-down-using-angular"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fexport-charts-using-angular"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fsetting-data-source-using-url-in-angular"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fadding-special-characters-using-angular"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fslice-data-plot-using-custom-api-in-angular"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fchange-chart-type-using-angular"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fapply-different-themes-using-angular"},{title:u,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fpercentage-calculation-using-angular"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fdynamically-add-chart-event-listener-using-angular"},{title:t,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fworking-with-events-using-angular"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Flifecycle-event-using-angular"},{title:v,path:"\u002Fdev\u002Fgetting-started\u002Fangular\u002Fangular\u002Fspecial-events-using-angular"}]}]}]}]},{title:H,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fyour-first-chart-using-react"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fyour-first-gauge-using-react"},{title:J,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fyour-first-map-using-react"}]},{title:d,children:[{title:n,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fconfigure-your-chart-using-react"},{title:K,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fadd-drill-down-using-react"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fadd-annotations-using-react"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fexport-charts-using-react"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fsetting-data-source-using-url-in-react"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fadding-special-characters-using-react"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fslice-data-plot-using-custom-api-in-react"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fchange-chart-type-using-react"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fapply-different-themes-using-react"},{title:u,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fpercentage-calculation-using-react"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fdynamically-add-chart-event-listener-using-react"},{title:t,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fworking-with-events-using-react"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Flifecycle-event-using-react"},{title:v,path:"\u002Fdev\u002Fgetting-started\u002Freact\u002Fspecial-events-using-react"}]}]}]},{title:W,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Freact-native\u002Fyour-first-chart-using-react-native"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Freact-native\u002Fyour-first-gauge-using-react-native"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Freact-native\u002Fyour-first-map-using-react-native"}]},{title:d,children:[{title:K,path:"\u002Fdev\u002Fgetting-started\u002Freact-native\u002Fadd-drill-down-using-react-native"},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Freact-native\u002Fchange-chart-type-using-react-native"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Freact-native\u002Fapply-different-themes-using-react-native"},{title:t,path:"\u002Fdev\u002Fgetting-started\u002Freact-native\u002Fworking-with-events-using-react-native"}]}]}]},{title:X,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fyour-first-chart-using-vuejs"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fyour-first-gauge-using-vuejs"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fyour-first-map-using-vuejs"}]},{title:d,children:[{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fconfigure-your-chart-using-vuejs"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fadd-drill-down-using-vuejs"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fadd-annotations-using-vuejs"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fexport-charts-using-vuejs"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fsetting-data-source-using-url-in-vuejs"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fadding-special-characters-using-vuejs"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fslice-data-plot-using-custom-api-in-vuejs"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fchange-chart-type-using-vuejs"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fapply-different-themes-using-vuejs"},{title:u,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fpercentage-calculation-using-vuejs"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fdynamically-add-chart-event-listener-using-vuejs"},{title:t,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fworking-with-events-using-vuejs"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Flifecycle-event-using-vuejs"},{title:v,path:"\u002Fdev\u002Fgetting-started\u002Fvue\u002Fspecial-events-using-vuejs"}]}]}]},{title:Z,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fyour-first-chart-using-jquery"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fyour-first-gauge-using-jquery"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fyour-first-map-using-jquery"}]},{title:d,children:[{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fconfigure-your-chart-using-jquery"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fadd-drill-down-using-jquery"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fexport-charts-using-jquery"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fsetting-data-source-using-url-in-jquery"},{title:"Rendering Charts from HTML Tables",path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Frendering-charts-from-html-tables"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fadding-special-characters-using-jquery"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fslice-data-plot-using-custom-api-in-jquery"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fchange-chart-type-using-jquery"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fapply-different-themes-using-jquery"},{title:u,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fpercentage-calculation-using-jquery"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fdynamically-add-chart-event-listener-using-jquery"},{title:t,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fworking-with-events-using-jquery"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Flifecycle-event-using-jquery"},{title:v,path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fspecial-events-using-jquery"}]}]},{title:"jQuery Plugin API",path:"\u002Fdev\u002Fgetting-started\u002Fjquery\u002Fapi-reference"}]},{title:_,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fyour-first-chart-using-ember"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fyour-first-gauge-using-ember"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fyour-first-map-using-ember"}]},{title:d,children:[{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fconfigure-your-chart-using-ember"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fadd-drill-down-using-ember"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fadd-annotations-using-ember"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fexport-charts-using-ember"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fsetting-data-source-using-url-in-ember"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fadding-special-characters-using-ember"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fslice-data-plot-using-custom-api-in-ember"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fchange-chart-type-using-ember"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fapply-different-themes-using-ember"},{title:u,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fpercentage-calculation-using-ember"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fdynamically-add-chart-event-listener-using-ember"},{title:t,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fworking-with-events-using-ember"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Flifecycle-event-using-ember"},{title:v,path:"\u002Fdev\u002Fgetting-started\u002Fember\u002Fspecial-events-using-ember"}]}]}]},{title:z,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fyour-first-chart-using-php"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fyour-first-gauge-using-php"},{title:J,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fyour-first-map-using-php"}]},{title:d,children:[{title:"Create Charts in PHP using Database",path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fcreate-charts-in-php-using-database"},{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fconfigure-your-chart-using-php"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fadd-drill-down-using-php"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fadd-annotations-using-php"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fexport-charts-using-php"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fsetting-data-source-using-url-in-php"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fadding-special-characters-using-php"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fslice-data-plot-using-custom-api-in-php"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fchange-chart-type-using-php"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fapply-different-themes-using-php"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Fdynamically-add-chart-event-listener-using-php"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fphp\u002Flifecycle-event-using-php"}]}]}]},{title:y,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fyour-first-chart-using-java"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fyour-first-gauge-using-java"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fyour-first-map-using-java"}]},{title:d,children:[{title:"Create Charts in JAVA using Database",path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fcreate-charts-in-java-using-database"},{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fconfigure-your-chart-using-java"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fadd-drill-down-using-java"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fadd-annotations-using-java"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fexport-charts-using-java"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fsetting-data-source-using-url-in-java"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fadding-special-characters-using-java"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fslice-data-plot-using-custom-api-in-java"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fchange-chart-type-using-java"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fapply-different-themes-using-java"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Fdynamically-add-chart-event-listener-using-java"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fjava\u002Flifecycle-event-using-java"}]}]}]},{title:B,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fyour-first-chart-using-aspnet"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fyour-first-gauge-using-aspnet"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fyour-first-map-using-aspnet"}]},{title:d,children:[{title:"Create Charts in ASP.NET using Database",path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fcreate-charts-in-aspnet-using-database"},{title:n,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fconfigure-your-chart-using-aspnet"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fadd-drill-down-using-aspnet"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fadd-annotations-using-aspnet"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fsetting-data-source-using-url-in-aspnet"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fadding-special-characters-using-aspnet"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fslice-data-plot-using-custom-api-in-aspnet"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fchange-chart-type-using-aspnet"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fapply-different-themes-using-aspnet"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Fdynamically-add-chart-event-listener-using-aspnet"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Faspnet\u002Flifecycle-event-using-aspnet"}]}]}]},{title:I,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fyour-first-chart-using-django"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fyour-first-gauge-using-django"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fyour-first-map-using-django"}]},{title:d,children:[{title:"Create Charts in Django using Database",path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fcreate-charts-in-django-using-database"},{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fconfigure-your-chart-using-django"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fadd-drill-down-using-django"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fadd-annotations-using-django"},{title:p,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fexport-charts-using-django"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fsetting-data-source-using-url-in-django"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fadding-special-characters-using-django"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fslice-data-plot-using-custom-api-in-django"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fchange-chart-type-using-django"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fapply-different-themes-using-django"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Fdynamically-add-chart-event-listener-using-django"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fdjango\u002Flifecycle-event-using-django"}]}]}]},{title:D,children:[{title:c,children:[{title:f,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fyour-first-chart-using-ruby-on-rails"},{title:h,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fyour-first-gauge-using-ruby-on-rails"},{title:q,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fyour-first-map-using-ruby-on-rails"}]},{title:d,children:[{title:"Create Charts in ROR using Database",path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fcreate-charts-in-ruby-on-rails-using-database"},{title:n,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fconfigure-your-chart-using-ruby-on-rails"},{title:s,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fadd-drill-down-using-ruby-on-rails"},{title:r,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fadd-annotations-using-ruby-on-rails"},{title:k,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fsetting-data-source-using-url-in-ruby-on-rails"},{title:i,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fadding-special-characters-using-ruby-on-rails"},{title:o,children:[{title:j,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fslice-data-plot-using-custom-api-in-ruby-on-rails"}]},{title:g,children:[{title:b,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fchange-chart-type-using-ruby-on-rails"},{title:e,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fapply-different-themes-using-ruby-on-rails"},{title:m,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Fdynamically-add-chart-event-listener-using-ruby-on-rails"},{title:l,path:"\u002Fdev\u002Fgetting-started\u002Fruby-on-rails\u002Flifecycle-event-using-ruby-on-rails"}]}]}]}]},{title:"Configuring your charts",children:[{title:"By Chart Type",children:[{title:as,path:"\u002Fdev\u002Funderstanding-fusioncharts"},{title:L,path:"\u002Fdev\u002Fchart-guide\u002Flist-of-charts"},{title:"Charts",children:[{title:"Line, Area and Column Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fline-area-and-column-charts"},{title:M,path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fpie-and-doughnut-charts"},{title:"Multi-Series Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fmulti-series-charts"},{title:"Overlapped Column and Bar Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Foverlapped-column-and-bar-charts"},{title:N,path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fcombination-charts"},{title:O,path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fstacked-charts"},{title:P,path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fscroll-charts"},{title:"Bubble and Scatter Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fbubble-and-xy-charts"},{title:"Pareto Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fpareto-charts"},{title:"Marimekko Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fmarimekko-chart"},{title:"Treemap",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Ftreemap"},{title:"Heat Map Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fheat-map-chart"},{title:"Gantt Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fgantt-chart"},{title:"Zoom Line Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fzoom-line-charts"},{title:"Drag-able Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fdrag-able-charts"},{title:"Select Scatter Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fselect-scatter-chart"},{title:"Zoom Scatter Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fzoom-scatter-chart"},{title:"Radar Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fradar-chart"},{title:Q,path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Ffunnel-chart"},{title:R,path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fpyramid-chart"},{title:"Bullet Graphs",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fbullet-graphs"},{title:"Multi-axis Line Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fmulti-axis-line-chart"},{title:"Multi-level Pie Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fmulti-level-pie-chart"},{title:"Candlestick Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fcandlestick-chart"},{title:"Waterfall Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fwaterfall-chart"},{title:"Box and Whisker Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fbox-and-whisker-chart"},{title:"Error Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Ferror-charts"},{title:"Spline Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fspline-charts"},{title:"Inverse Y Axis Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Finverse-y-axis-chart"},{title:"Logarithmic Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Flogarithmic-charts"},{title:"Step Line Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fstep-line-chart"},{title:"Kagi Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fkagi-chart"},{title:"Spark Charts",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fspark-charts"},{title:"Drag Node Chart",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fdrag-node-chart"},{title:"Real-Time Charts\t",path:"\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Freal-time-charts"}]},{title:"Gauges and Widgets",children:[{title:"Angular Gauge",path:"\u002Fdev\u002Fchart-guide\u002Fgauges-and-widgets\u002Fangular-gauge"},{title:"Bulb Gauge",path:"\u002Fdev\u002Fchart-guide\u002Fgauges-and-widgets\u002Fbulb-gauge"},{title:"Cylinder Gauge",path:"\u002Fdev\u002Fchart-guide\u002Fgauges-and-widgets\u002Fcylinder-gauge"},{title:"Led Gauge",path:"\u002Fdev\u002Fchart-guide\u002Fgauges-and-widgets\u002Fled-gauge"},{title:"Linear Gauge",path:"\u002Fdev\u002Fchart-guide\u002Fgauges-and-widgets\u002Flinear-gauge"},{title:"Thermometer Gauge",path:"\u002Fdev\u002Fchart-guide\u002Fgauges-and-widgets\u002Fthermometer-gauge"}]},{title:"Maps",children:[{title:"List of Maps",path:"\u002Fdev\u002Fmap-guide\u002Flist-of-maps"},{title:"Setup",path:"\u002Fdev\u002Fmap-guide\u002Fsetup"},{title:"Simple Data Driven Map",path:"\u002Fdev\u002Fmap-guide\u002Fsimple-data-driven-maps"},{title:"Custom Entity IDs",path:"\u002Fdev\u002Fmap-guide\u002Fcustom-entity-ids"},{title:"Add Color Based on Data Range",path:"\u002Fdev\u002Fmap-guide\u002Fcolouring-based-on-data-range"},{title:"Markers",path:"\u002Fdev\u002Fmap-guide\u002Fmarkers"},{title:"Listening to Map Events",path:"\u002Fdev\u002Fmap-guide\u002Flistening-to-map-events"},{title:"Add Drill Down to Maps",path:"\u002Fdev\u002Fmap-guide\u002Fadd-drill-down-to-maps"},{title:"Map Spec Sheets",children:[{title:"Map Marker Data",path:"\u002Fdev\u002Fmaps\u002Fmarker-data\u002F"},{title:"Map Specification Sheets",path:"\u002Fdev\u002Fmaps\u002Fspec-sheets\u002F"}]}]}]},{title:"By Chart Component",children:[{title:"Size and Type",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fsize-and-type"},{title:"Border and Background",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fborder-and-background"},{title:"Canvas",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fcanvas"},{title:S,path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Faxes"},{title:"Captions",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fcaption-and-sub-caption"},{title:T,path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fdata-plot"},{title:U,path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fdata-labels"},{title:"Data Values",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fdata-values"},{title:"Number Format",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fnumber-format"},{title:"Fonts",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Ffonts"},{title:"Chart Palettes",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fchart-palettes"},{title:"Chart Limits ",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fchart-limits"},{title:"Div Lines and Grids",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fdiv-lines-and-grids"},{title:"Vertical Div Lines",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fvertical-div-lines"},{title:"Zero Plane",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fzero-plane"},{title:"Trend Lines and Zones",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Ftrend-lines-and-zones"},{title:"Anchors and Lines",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fanchors-and-lines"},{title:"Cross Line",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fcross-line"},{title:"Tooltips",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Ftool-tips"},{title:"Vertical Lines",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fvertical-lines"},{title:V,path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Flegend"},{title:"Tick Marks",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Ftick-marks"},{title:"Loading External Logo",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Floading-external-logo"},{title:"Chart Paddings and Margins",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fchart-paddings-and-margins"},{title:"Toolbar",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Ftoolbar"},{title:"Drill-down",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fdrill-down"}]},{title:"Using Annotations",children:[{title:"Introduction to Annotations",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fintroduction-to-annotations"},{title:"Create Annotations",children:[{title:"Create Text Annotations",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fcreating-annotations\u002Fcreate-text-annotations"},{title:"Create Image Annotations",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fcreating-annotations\u002Fcreate-image-annotations"},{title:"Create Shape Annotations",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fcreating-annotations\u002Fcreate-shape-annotations"},{title:"Create Path Annotations",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fcreating-annotations\u002Fcreate-path-annotations"}]},{title:"Positioning Annotations using Absolute Values",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fpositioning-annotations-using-absolute-values"},{title:"Positioning Annotations using Macros",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fpositioning-annotations-using-macros"},{title:"Grouping Annotations",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fgrouping-annotations"},{title:"Dynamically Control Annotations",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fdynamically-control-annotations"},{title:"Real Life Use Cases",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Freal-life-use-cases"},{title:"Annotation References",path:"\u002Fdev\u002Fchart-guide\u002Fchart-configurations\u002Fannotations\u002Fannotation-references"}]},{title:"Using Themes",children:[{title:"Introduction to Themes",path:"\u002Fdev\u002Fthemes\u002Fintroduction-to-themes"},{title:"Theme Manager",path:"\u002Fdev\u002Fthemes\u002Ftheme-manager"},{title:"Create Your Own Themes",path:"\u002Fdev\u002Fthemes\u002Fcreate-your-own-themes"}]},{title:p,children:[{title:"Exporting Charts as Image and PDF",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fexporting-charts-as-image-and-pdf"},{title:"Exporting Chart Data",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fexporting-chart-data"},{title:"Modes of Export",children:[{title:"Exporting Charts and Chart Data Using the Server-side Export Feature",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fmodes-of-export\u002Fexporting-charts-and-chart-data-using-the-server-side-export-feature"},{title:"Exporting Charts and Chart Data Using the Client-side Export Feature",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fmodes-of-export\u002Fexporting-charts-and-chart-data-using-the-client-side-export-feature"},{title:"Exporting Charts and Chart Data Using the Auto Export Feature",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fmodes-of-export\u002Fexporting-charts-and-chart-data-using-the-auto-export-feature"}]},{title:"Logging Export Statistics",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Flogging-export-statistics"},{title:"Configuring the Export Feature",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fconfiguring-the-export-feature"},{title:"Export Handler",children:[{title:B,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fserver-side-export\u002Fsetup-private-export-server\u002Fasp-net"},{title:z,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fserver-side-export\u002Fsetup-private-export-server\u002Fphp"},{title:y,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fserver-side-export\u002Fsetup-private-export-server\u002Fjava"},{title:D,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fserver-side-export\u002Fsetup-private-export-server\u002Fruby-on-rails"}]},{title:"Exporting Multiple Charts in a Single Image",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Fexporting-multiple-charts-in-a-single-image"},{title:"Architecture of the FusionCharts Export Server",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fc-export-server\u002Farchitecture-of-the-fusioncharts-export-server"}]},{title:"Common Use Cases",children:[{title:"Building a Dashboard",path:"\u002Fdev\u002Fcommon-use-cases\u002Fbuilding-dashboards"},{title:"Remove an Existing Chart from a Page",path:"\u002Fdev\u002Fcommon-use-cases\u002Fremove-an-existing-chart-from-a-page"},{title:"Get Reference to Chart Object",path:"\u002Fdev\u002Fcommon-use-cases\u002Freference-to-chart-object"},{title:"FusionCharts Constructor and Object",path:"\u002Fdev\u002Fcommon-use-cases\u002Ffusioncharts-constructor-and-object"},{title:"Change Chart Properties at Runtime",path:"\u002Fdev\u002Fcommon-use-cases\u002Fchange-chart-properties-at-runtime"},{title:"Color Range Usecases",path:"\u002Fdev\u002Fcommon-use-cases\u002Fcolor-range-usecases"},{title:"Using Special Characters",path:"\u002Fdev\u002Fcommon-use-cases\u002Fusing-special-characters-in-a-chart"},{title:"Plot Discontinuous Data",path:"\u002Fdev\u002Fcommon-use-cases\u002Fplot-discontinuous-data"},{title:"Highlight Specific Data Points",path:"\u002Fdev\u002Fcommon-use-cases\u002Fhighlight-specific-data-points-on-chart"},{title:"View Data of Existing Chart",path:"\u002Fdev\u002Fcommon-use-cases\u002Fview-data-of-existing-chart-on-page"},{title:"Get Formatted Numbers Outside Chart",path:"\u002Fdev\u002Fcommon-use-cases\u002Fget-formatted-numbers-outside-chart"},{title:"Get SVG Representation of a Chart",path:"\u002Fdev\u002Fcommon-use-cases\u002Fget-svg-representation-of-a-chart"},{title:"Configure Chart Messages",path:"\u002Fdev\u002Fcommon-use-cases\u002Fchange-chart-messages"},{title:"Render Thumbnail Versions of Charts",path:"\u002Fdev\u002Fcommon-use-cases\u002Frender-thumbnail-versions-of-chart"},{title:"Create Interactive Charts using PHP and MySQL Database",path:"\u002Fdev\u002Fusing-with-server-side-languages\u002Ftutorials\u002Fphp-mysql-charts",visibility:a}]}]},{title:C,children:[{title:"Attributes",children:[{title:Y,path:"\u002Fdev\u002Fchart-attributes\u002F"},{title:"Map Attributes",path:"\u002Fdev\u002Fmaps\u002Fattribute-reference"}]},{title:"JavaScript Methods & Events",children:[{title:A,path:"\u002Fdev\u002Fapi\u002Ffusioncharts"},{title:x,children:[{title:"Introduction to Events",path:"\u002Fdev\u002Fadvanced-chart-configurations\u002Fevents\u002Fintroduction-to-events"},{title:"Handling Events",path:"\u002Fdev\u002Fadvanced-chart-configurations\u002Fevents\u002Fhandling-events"},{title:"Classifying Events",path:"\u002Fdev\u002Fadvanced-chart-configurations\u002Fevents\u002Fclassifying-events"},{title:x,path:"\u002Fdev\u002Fapi\u002Ffusioncharts\u002Ffusioncharts-events"}]},{title:E,path:"\u002Fdev\u002Fapi\u002Ffusioncharts\u002Ffusioncharts-methods"},{title:$,path:"\u002Fdev\u002Fapi\u002Ffusioncharts\u002Ffusioncharts-properties"},{title:aa,path:"\u002Fdev\u002Fapi\u002Ffusioncharts\u002Ffusioncharts-typedefs"},{title:"Namespaces",children:[{title:"Debugger",path:"\u002Fdev\u002Fapi\u002Ffusioncharts\u002Fnamespaces\u002Fdebugger"},{title:"Ajax",path:"\u002Fdev\u002Fapi\u002Ffusioncharts\u002Fnamespaces\u002Fajax"},{title:"PrintManager",path:"\u002Fdev\u002Fapi\u002Ffusioncharts\u002Fnamespaces\u002Fprintmanager"},{title:"Annotations",path:"\u002Fdev\u002Fapi\u002Ffusioncharts\u002Fnamespaces\u002Fannotations"}]}]}]},{title:"Upgrading",children:[{title:"Upgrade from Evaluation Versions",path:"\u002Fdev\u002Fupgrading\u002Fupgrading-from-evaluation-versions"},{title:"Upgrade to v3.14.x",children:[{title:"Changelog",path:"\u002Fdev\u002Fupgrading\u002Fchange-log"},{title:"Maps Improvement",path:"\u002Fdev\u002Fupgrading\u002Fmaps-improvement\u002Fmaps-improvement-3-14-0",visibility:a},{title:"What's New",path:"\u002Fdev\u002Fupgrading\u002Fwhats-new"},{title:"Changed Behavior",path:"\u002Fdev\u002Fupgrading\u002Fchanged-behavior"}]},{title:ab,children:[{title:"v3.13.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-13-X"},{title:"v3.12.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-12-X"},{title:"v3.11.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-11-X"},{title:"v3.10.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-10-X"},{title:"v3.9-0",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-9-0"},{title:"v3.8-0",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-8-0"},{title:"v3.7.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-7-X"},{title:ac,path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-6-0"},{title:"v3.5.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-5-X"},{title:"v3.4.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-4-X"},{title:"v3.3.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-3-X"},{title:"v3.2.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-2-X"},{title:"v3.1.x",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-1-X"},{title:"v3.0.x ",path:"\u002Fdev\u002Fupgrading\u002Fversion-history\u002Fversion-3-0-X"}]},{title:"From Flash to JavaScript",path:"\u002Fdev\u002Fupgrading\u002Ffrom-flash-to-javascript"}]}]},{title:"FusionTime",description:"Plot high performance time-series visualizations",longDescription:"Learn how to create time-series and stock charts in JavaScript",icon:"fc_fusiontime",children:[{title:w,path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fhow-fusion-time-works"},{title:ad,children:[{title:ae,path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fcreate-your-first-chart-in-fusiontime"},{title:af,path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fcreate-your-multi-variate-chart-in-fusiontime"},{title:ag,path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fcreate-your-multi-series-chart-in-fusiontime"},{title:"FusionTime JSON Structure",path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Ffusiontime-json-structure"},{title:"Data Aggregation & Binning",path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fchange-default-aggregation"},{title:"Output Time Format",path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Foutput-time-format"},{title:"Change Plot Type",path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fchange-plot-type-in-fusiontime"},{title:"Style Definition",path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fstyle-definition"},{title:"Themes",path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fintroduction-to-themes-in-fusiontime"},{title:ah,path:"\u002Fdev\u002Ffusiontime\u002Fgetting-started\u002Fexport-charts-fusiontime"}]},{title:"Integrations",children:[{title:"Create a Chart in Angular",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fangular\u002Fyour-first-chart-using-angular-in-fusiontime"},{title:"Create a Chart in AngularJS",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fangularjs\u002Fyour-first-chart-using-angularjs-in-fusiontime"},{title:"Create a Chart in React",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Freact\u002Fyour-first-chart-using-react-in-fusiontime"},{title:"Create a Chart in React Native",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Freact-native\u002Fyour-first-chart-using-react-native-in-fusiontime"},{title:"Create a Chart in Vue",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fvuejs\u002Fyour-first-chart-using-vuejs-in-fusiontime"},{title:"Create a Chart in jQuery",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fjquery\u002Fyour-first-chart-using-jquery-in-fusiontime"},{title:"Create a Chart in Ember",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fember\u002Fyour-first-chart-using-ember-in-fusiontime"},{title:"Create a Chart in PHP",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fphp\u002Fyour-first-chart-using-php-in-fusiontime"},{title:"Create a Chart in Java",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fjava\u002Fyour-first-chart-using-java-in-fusiontime"},{title:"Create a Chart in ASP.NET",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Faspnet\u002Fyour-first-chart-using-aspnet-in-fusiontime"},{title:"Create a Chart in Django",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fdjango\u002Fyour-first-chart-using-django-in-fusiontime"},{title:"Create a Chart in Ruby on Rails",path:"\u002Fdev\u002Ffusiontime\u002Fintegrations\u002Fruby-on-rails\u002Fyour-first-chart-using-ruby-on-rails-in-fusiontime"}]},{title:"FusionTime Components",children:[{title:ai,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Ftime-axis"},{title:aj,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Ftime-navigator"},{title:ak,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Fstandard-range-selector"},{title:al,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Fcustom-range-selector"},{title:"CrossLine",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Fcrossline-in-fusiontime"},{title:am,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Fy-axis-in-fusiontime"},{title:"Predictive Data",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Fpredictive-data-fusiontime"},{title:"Reference Line",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Freference-line-in-fusiontime"},{title:"Reference Zone",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Freference-zone-in-fusiontime"},{title:F,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Ftooltip-in-fusiontime"},{title:ao,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Ftime-marker"},{title:ap,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Fdata-markers"},{title:"Plot Types",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-component\u002Fplot-types-in-fusiontime"}]},{title:"FusionTime Data Layer",children:[{title:w,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Foverview"},{title:"DataTable Operations",children:[{title:"Select",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Fselect"},{title:"Sort",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Fsort"},{title:"Filter",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Ffilter"},{title:aq,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Fgroupby",visibility:a},{title:ar,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Fpivot"},{title:"Pipe",path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Fuse-pipe"}]},{title:x,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Ffusiontime-events"},{title:E,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-data-engine\u002Ffusiontime-methods"}]},{title:Y,path:"\u002Fdev\u002Ffusiontime\u002Ffusiontime-attributes"},{title:"Release Notes\t",path:"\u002Fdev\u002Ffusiontime\u002Frelease-notes"}]},{title:"FusionExport",icon:"fc_fusionexport",description:"Export full Dashboards as PDFs for use in reports and emails",longDescription:"Learn how to export full dashboards in your server",children:[{title:w,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Foverview"},{title:G,children:[{title:"Install FusionExport Server",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Finstallation\u002Finstall-fusionexport-server"},{title:"Install FusionExport CLI",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Finstallation\u002Finstall-fusionexport-cli",visibility:a},{title:"Install FusionExport Server SDKs",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Finstallation\u002Finstall-fusionexport-server-sdks"},{title:"Install FusionExport for Windows Service",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Finstallation\u002Finstall-fusionexport-for-windows-service"}]},{title:"Tutorials",children:[{title:"Export chart as image",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fexport-chart-as-image"},{title:"Change the export type",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fchange-the-export-type"},{title:"Export charts as bulk",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fexport-charts-in-bulk"},{title:"Change the export quality",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fchange-the-export-quality"},{title:"Customize the width and height of an exported chart",visibility:a,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fcustomize-the-width-and-height-of-an-exported-chart"},{title:"Export in bulk using multiple json files",visibility:a,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fexport-in-bulk-using-multiple-js-json-files"},{title:"Export the output files as a zip",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fexport-the-output-files-as-zip"},{title:"Override the chart config",visibility:a,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Foverride-the-chart-config"},{title:"Export a dashboard",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fexport-a-dashboard"},{title:"Add a logo or a heading to the dashboard",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fadd-a-logo-or-heading-to-the-dashboard"},{title:"Convert an SVG image to PNG\u002FJPEG\u002FPDF",visibility:a,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fconvert-an-svg-image-to-png-jpeg-pdf"},{title:"Inject extra JavaScript while exporting",visibility:a,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Finject-extra-javascript-while-exporting"},{title:"Manipulate the output filename",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fmanipulate-the-output-filename"},{title:"Enable logging",visibility:a,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fenabling-logging"},{title:"Save exported files to S3",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fsave-exported-files-to-s-three"},{title:"Asynchronous capture",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fasynchronous-capture"},{title:"Export a D3 chart",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fexport-a-d3-chart"},{title:"Disable Watermark",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fdisable-watermark-in-fusionexport"},{title:"Custom Version of FusionCharts in FusionExport",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fcustom-version-of-fusioncharts-in-fusionexport"},{title:"Export PDF files in Print Format",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fexport-pdf-files-in-print-format"},{title:"Customize the Dimensions of Exported Files",visibility:a,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ftutorials\u002Fcustomize-the-dimensions-of-exported-files"}]},{title:C,children:[{title:"FusionExport Server",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ffusionexport-server"},{title:"SDK API Reference",children:[{title:"C#",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Fsdk-api-reference\u002Fc-sharp"},{title:y,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Fsdk-api-reference\u002Fjava"},{title:z,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Fsdk-api-reference\u002Fphp"},{title:"Node.js",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Fsdk-api-reference\u002Fnodejs"},{title:"Python",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Fsdk-api-reference\u002Fpython"}]}]},{title:"CLI Reference",visibility:a,path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Fcli-reference"},{title:"Release Notes",path:"\u002Fdev\u002Fexporting-charts\u002Fusing-fusionexport\u002Ffusionexport-release-notes"}]},{title:"FusionCharts.NET",icon:"fc_net",description:"Charting library for ASP.NET MVC & ASP.NET WebForms",longDescription:"Learn how to implement FusionCharts in ASP.NET MVC and WebForms using our .NET assembly",children:[{title:w,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fgetting-started\u002Foverview-of-fusioncharts-net-viz"},{title:ad,children:[{title:G,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fgetting-started\u002Finstall-fusioncharts-net"},{title:"Create your First Chart",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fgetting-started\u002Fcreate-first-chart-using-fusioncharts-net"},{title:"Create a chart using Razor Page",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fgetting-started\u002Ffusioncharts-net-using-razor"},{title:"Filter Chart Data",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fgetting-started\u002Ffilter-chart-data-using-fusioncharts-net",visibility:a},{title:"Change Theme",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fgetting-started\u002Fchange-theme-using-fusioncharts-net"},{title:ah,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fgetting-started\u002Fexport-chart-using-fusioncharts-net"}]},{title:"Chart Types",children:[{title:L,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Flist-of-charts-in-fusioncharts-net"},{title:"Column and Bar Charts",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Fcolumn-bar-net"},{title:"Line and Spline Charts",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Fline-spline-net"},{title:"Area Chart",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Farea-chart-net"},{title:O,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Fstacked-chart-net"},{title:"Overlapped Charts",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Foverlapped-chart-net",visibility:a},{title:P,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Fscroll-charts-net",visibility:a},{title:N,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Fcombination-charts-net"},{title:M,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Fpie-doughnut-net"},{title:Q,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Ffunnel-chart-net"},{title:R,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Fpyramid-chart-net"},{title:"Time-Series Charts",children:[{title:ae,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Ftime-series-chart-net"},{title:af,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Ftime-series-multivariate-chart-net"},{title:ag,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fchart-types\u002Ftime-series-multiple-data-plot-chart-net"}]}]},{title:as,children:[{title:"Caption and Sub-Caption",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusioncharts-net-caption-sub-caption"},{title:S,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusioncharts-net-axes"},{title:T,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusioncharts-net-data-plot"},{title:"Data Value",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusioncharts-net-data-value"},{title:U,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusioncharts-net-data-labels"},{title:V,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusioncharts-net-legend"},{title:F,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusioncharts-net-tooltip"},{title:"Time-series Components",children:[{title:ai,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Ftime-axis"},{title:aj,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Ftime-navigator"},{title:ak,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Fstandard-range-selector"},{title:al,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Fcustom-range-selector"},{title:am,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Fy-axis-in-fusiontime"},{title:"Reference Lines",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Freference-line-in-fusiontime"},{title:ao,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Ftime-marker"},{title:ap,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Fdata-markers"},{title:F,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Ftooltip"},{title:"Binning",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fcomponents\u002Ffusiontime-components\u002Ffusioncharts-net-binning"}]}]},{title:"Data Engine",children:[{title:w,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fdata-engine-overview"},{title:"Data Source",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fdata-source-data-engine"},{title:"Select Fields",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fselect-fields"},{title:"Select Top Records",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fselect-top-records"},{title:"Filter Data",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Ffilter-data"},{title:"OrderBy",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Forder-by"},{title:"Calculated Column",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fcalculated-column"},{title:aq,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fgroup-by"},{title:"Data Aggregation",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Faggregation"},{title:"GroupBy with Aggregation",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fgroup-by-aggregation"},{title:ar,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fpivot"},{title:"Pagination",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fpagination"},{title:"Data Engine APIs",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fdata-engine\u002Fdata-engine-api"}]},{title:C,children:[{title:"Visualization API",path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fapi-reference-net\u002Fvisualization-api-net"},{title:x,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fapi-reference-net\u002Fevents-net"}]},{title:ab,path:"\u002Fdev\u002Ffusioncharts-aspnet-visualization\u002Fversion-history-fusioncharts-net"}]}],landingPageData:{page:{fusioncharts:{plugins:[{text:"Front end plugins",value:"frontend",toggletext:"Front End Plugins"},{text:"Back end plugins",value:"backend",toggletext:"Back End Plugins"}],frontend:[{value:an,classname:"icon-js",link:"\u002Fgetting-started\u002Fplain-javascript\u002Fyour-first-chart-using-plain-javascript"},{value:H,classname:"icon-react",link:"\u002Fgetting-started\u002Freact\u002Fyour-first-chart-using-react"},{value:"Angular 2+",classname:"icon-angular2x",link:"\u002Fgetting-started\u002Fangular\u002Fangular\u002Fyour-first-chart-using-angular"},{value:Z,classname:"icon-jQuery",link:"\u002Fgetting-started\u002Fjquery\u002Fyour-first-chart-using-jquery"},{value:X,classname:"icon-vue",link:"\u002Fgetting-started\u002Fvue\u002Fyour-first-chart-using-vuejs"},{value:_,classname:"icon-ember",link:"\u002Fgetting-started\u002Fember\u002Fyour-first-chart-using-ember"},{value:W,classname:"icon-reactnative",link:"\u002Fgetting-started\u002Freact-native\u002Fyour-first-chart-using-react-native"},{value:"AngularJS",classname:"icon-angular1x",link:"\u002Fgetting-started\u002Fangular\u002Fangularjs\u002Fyour-first-chart-using-angularjs"}],backend:[{value:z,classname:"icon-php",link:"\u002Fgetting-started\u002Fphp\u002Fyour-first-chart-using-php"},{value:B,classname:"icon-NET",link:"\u002Fgetting-started\u002Faspnet\u002Fyour-first-chart-using-aspnet"},{value:y,classname:"icon-java",link:"\u002Fgetting-started\u002Fjava\u002Fyour-first-chart-using-java"},{value:I,classname:"icon-django",link:"\u002Fgetting-started\u002Fdjango\u002Fyour-first-chart-using-django"},{value:D,classname:"icon-RubyOnRails",link:"\u002Fgetting-started\u002Fruby-on-rails\u002Fyour-first-chart-using-ruby-on-rails"}],dashboard:[{value:"Smart Energy Monitoring Dashboard",imagepath:"\u002Fimages\u002Flandingpage\u002Fsmart-energy-monitoring-dashboard.png",attvalue:"smart-energy-monitoring-dashboard",link:"https:\u002F\u002Fwww.fusioncharts.com\u002Fdashboards\u002Fsmart-energy-monitoring-dashboard"},{value:"Google Analytics Dashboard",imagepath:"\u002Fimages\u002Flandingpage\u002Fthumb-google-analytics-dashboard.jpg",attvalue:"thumb-google-analytics-dashboard",link:"https:\u002F\u002Fwww.fusioncharts.com\u002Fdashboards\u002Fgoogle-analytics-web-dashboard"},{value:"Sales Management Dashboard",imagepath:"\u002Fimages\u002Flandingpage\u002Fthumb-management-dashboard.png",attvalue:"thumb-management-dashboard",link:"https:\u002F\u002Fwww.fusioncharts.com\u002Fdashboards\u002Fsales-management-dashboard"}],charts:[{value:"Composition",imagepath:"\u002Fimages\u002Flandingpage\u002Fcomposition.svg",attvalue:"composition",link:"\u002Fdemos\u002Fchart-gallery#intent=1"},{value:"Distribution",imagepath:"\u002Fimages\u002Flandingpage\u002Fdistribution.svg",attvalue:"distribution",link:"\u002Fdemos\u002Fchart-gallery#intent=2"},{value:"Comparison",imagepath:"\u002Fimages\u002Flandingpage\u002Fcomparison.svg",attvalue:"comparison",link:"\u002Fdemos\u002Fchart-gallery#intent=3"}]}},headerLinks:[{title:"Chart Explorer",link:"\u002Fdemos\u002Fchart-gallery"},{title:A,children:[{title:"FusionCharts Constructor",link:"\u002Fapi\u002Ffusioncharts"},{title:x,link:"\u002Fapi\u002Ffusioncharts\u002Ffusioncharts-events"},{title:E,link:"\u002Fapi\u002Ffusioncharts\u002Ffusioncharts-methods"},{title:$,link:"\u002Fapi\u002Ffusioncharts\u002Ffusioncharts-properties"},{title:aa,link:"\u002Fapi\u002Ffusioncharts\u002Ffusioncharts-typedefs"}]},{title:"v3.14.0-sr.1",children:[{title:"v3.14.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.14.0\u002F"},{title:"v3.13.5-sr.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.5-sr.1\u002F"},{title:"v3.13.5",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.5\u002F"},{title:"v3.13.4",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.4\u002F"},{title:"v3.13.3-sr.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.3-sr.1\u002F"},{title:"v3.13.3",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.3\u002F"},{title:"v3.13.2-sr.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.2-sr.1\u002F"},{title:"v3.13.2",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.2\u002F"},{title:"v3.13.1-sr.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.1-sr.1\u002F"},{title:"v3.13.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.1\u002F"},{title:"v3.13.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.13.0\u002F"},{title:"v3.12.2",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.12.2\u002F"},{title:"v3.12.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.12.1\u002F"},{title:"v3.12.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.12.0\u002F"},{title:"v3.11.3",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.11.3\u002F"},{title:"v3.11.2",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.11.2\u002F"},{title:"v3.11.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.11.0\u002F"},{title:"v3.10.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.10.1\u002F"},{title:"v3.10.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.10.0\u002F"},{title:"v3.9.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.9.0\u002F"},{title:"v3.8.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.8.0\u002F"},{title:"v3.7.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.7.1\u002F"},{title:"v3.7.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.7.0\u002F"},{title:ac,link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.6.0\u002F"},{title:"v3.5.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.5.1\u002F"},{title:"v3.5.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.5.0\u002F"},{title:"v3.4.1",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.4.1\u002F"},{title:"v3.4.0",link:"https:\u002F\u002Fdocs.fusioncharts.com\u002Farchive\u002F3.4.0\u002F"}]}]},guide:{attributes:{title:"Create a Chart Using FusionCharts | FusionCharts",description:"This article outlines the steps to be executed for creating your first chart using the plain javascript.",heading:"Create a Chart Using FusionCharts"},body:"\u003Cp\u003E\u003Cstrong\u003EFusionCharts Suite XT\u003C\u002Fstrong\u003E — the industry&#39;s most comprehensive JavaScript charting solution — is all about easing the whole process of data visualization through charts.\u003C\u002Fp\u003E\n\u003Cp\u003EIn this page, we&#39;ll see how to install \u003Cstrong\u003EFusionCharts\u003C\u002Fstrong\u003E library and all the other dependencies on your system and render a chart using Plain JavaScript.\u003C\u002Fp\u003E\n\u003Ch2 id=\"installation\"\u003EInstallation\u003C\u002Fh2\u003E\n\u003Cp\u003EInstall \u003Cstrong\u003EFusionCharts\u003C\u002Fstrong\u003E using any of the following steps:\u003C\u002Fp\u003E\n\u003Cdiv class=\"code-wrapper\"\u003E\n\u003Cul class='code-tabs extra-tabs'\u003E\n    \u003Cli class='active'\u003E\u003Ca data-toggle='cdn'\u003ECDN\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Ca data-toggle='localfiles'\u003ELocal Files\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Ca data-toggle='npm'\u003ENPM\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n\u003Cdiv class='tab-content extra-tabs'\u003E\n\u003Cdiv class='tab npm-tab'\u003E\n\n\u003Cdiv\u003E\u003Cstrong\u003EPrerequisites\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Cdiv\u003E\n    \u003Col\u003E\n        \u003Cli\u003EBefore installing \u003Ccode\u003Efusioncharts\u003C\u002Fcode\u003E package via \u003Cstrong\u003Enpm\u003C\u002Fstrong\u003E, make sure you have \u003Cstrong\u003ENode.js\u003C\u002Fstrong\u003E installed in your system.\u003C\u002Fli\u003E\n        \u003Cli\u003EMake sure you have a bundler like \u003Cstrong\u003Ewebpack\u003C\u002Fstrong\u003E and \u003Cstrong\u003Eparcel\u003C\u002Fstrong\u003E or have \u003Cstrong\u003Ebrowserify\u003C\u002Fstrong\u003E installed in your system.\u003C\u002Fli\u003E\n    \u003C\u002Fol\u003E\n\u003C\u002Fdiv\u003E\n\u003Cdiv\u003E\u003Cstrong\u003ECreate a project folder using the following command:\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ mkdir projectName\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\u003C\u002Fpre\u003E\n\n\u003Cdiv\u003E\u003Cstrong\u003EGet inside the directory using \u003Ccode\u003Ecd\u003C\u002Fcode\u003E command as shown below:\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ cd projectName\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\u003C\u002Fpre\u003E\n\n\u003Cdiv\u003E\u003Cstrong\u003ENow, to install the \u003Ccode\u003Efusioncharts\u003C\u002Fcode\u003E package via npm run the command below:\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ npm install fusioncharts\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\u003C\u002Fpre\u003E\n\u003C\u002Fdiv\u003E\n\n\u003Cdiv class='tab cdn-tab active'\u003E\n\u003Cdiv\u003E\u003Cstrong\u003ETo install the \u003Cstrong\u003EFusionCharts\u003C\u002Fstrong\u003E Suite follow the steps below:\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Cdiv\u003E\n    \u003Col\u003E\n        \u003Cli\u003EInclude the \u003Cstrong\u003EFusionCharts\u003C\u002Fstrong\u003E JavaScript files from CDN.\u003C\u002Fli\u003E\n        \u003Cli\u003EInclude the theme file.\u003C\u002Fli\u003E\n    \u003C\u002Fol\u003E\n\u003C\u002Fdiv\u003E\n\u003Cdiv\u003EThe code is shown below:\u003C\u002Fdiv\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-javascript\"\u003E\n&lt;head&gt;\n    &lt;!-- Step 1 - Include the fusioncharts core library --&gt;\n    &lt;script type=&quot;text\u002Fjavascript&quot; src=&quot;\u003Ca href=\"https:\u002F\u002Fcdn.fusioncharts.com\u002Ffusioncharts\u002Flatest\u002Ffusioncharts.js&quot;&gt;&lt;\u002Fscript&gt;\" title=\"\"\u003Ehttps:\u002F\u002Fcdn.fusioncharts.com\u002Ffusioncharts\u002Flatest\u002Ffusioncharts.js&quot;&gt;&lt;\u002Fscript&gt;\u003C\u002Fa\u003E\n    &lt;!-- Step 2 - Include the fusion theme --&gt;\n    &lt;script type=&quot;text\u002Fjavascript&quot; src=&quot;\u003Ca href=\"https:\u002F\u002Fcdn.fusioncharts.com\u002Ffusioncharts\u002Flatest\u002Fthemes\u002Ffusioncharts.theme.fusion.js&quot;&gt;&lt;\u002Fscript&gt;\" title=\"\"\u003Ehttps:\u002F\u002Fcdn.fusioncharts.com\u002Ffusioncharts\u002Flatest\u002Fthemes\u002Ffusioncharts.theme.fusion.js&quot;&gt;&lt;\u002Fscript&gt;\u003C\u002Fa\u003E\n&lt;\u002Fhead&gt;\n\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\u003C\u002Fpre\u003E\n\u003C\u002Fdiv\u003E\n\n\u003Cdiv class='tab localfiles-tab'\u003E\n\u003Cdiv\u003E\u003Cstrong\u003ETo install the \u003Cstrong\u003EFusionCharts\u003C\u002Fstrong\u003E Suite follow the steps below:\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Cdiv\u003E\n    \u003Col\u003E\n        \u003Cli\u003EInclude the \u003Cstrong\u003EFusionCharts\u003C\u002Fstrong\u003E JavaScript files, which can be downloaded from \u003Ca href=\"https:\u002F\u002Fwww.fusioncharts.com\u002Fdownload\u002Ffusioncharts-suite-xt\" title=\"\"\u003Ehere\u003C\u002Fa\u003E.\u003C\u002Fli\u003E\n        \u003Cli\u003EInclude the FusionCharts theme file to apply style to the charts.\u003C\u002Fli\u003E\n    \u003C\u002Fol\u003E\n\u003C\u002Fdiv\u003E\n\u003Cdiv\u003EThe code is shown below:\u003C\u002Fdiv\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-javascript\"\u003E\n&lt;head&gt;\n    &lt;!-- Step 1 - Include the fusioncharts core library --&gt;\n    &lt;script type=&quot;text\u002Fjavascript&quot; src=&quot;path\u002Fto\u002Flocal\u002Ffusioncharts.js&quot;&gt;&lt;\u002Fscript&gt;\n    &lt;!-- Step 2 - Include the fusion theme --&gt;\n    &lt;script type=&quot;text\u002Fjavascript&quot; src=&quot;path\u002Fto\u002Flocal\u002Fthemes\u002Ffusioncharts.theme.fusion.js&quot;&gt;&lt;\u002Fscript&gt;\n&lt;\u002Fhead&gt;\n\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\u003C\u002Fpre\u003E\n\u003C\u002Fdiv\u003E\n\n\u003Cp\u003E\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\u003C\u002Fp\u003E\n\u003Cp\u003EThat completes the installation of \u003Cstrong\u003EFusionCharts\u003C\u002Fstrong\u003E Suite.\u003C\u002Fp\u003E\n\u003Ch2 id=\"create-your-first-chart\"\u003ECreate Your First Chart\u003C\u002Fh2\u003E\n\u003Cp\u003ELet&#39;s create a Column 2D chart showing the &quot;Countries with Most Oil Reserves&quot;.\u003C\u002Fp\u003E\n\u003Cblockquote\u003E\n\u003Cp\u003EFusionCharts Suite has 95+ chart types for you to explore. Find the complete list of chart types \u003Ca href=\"https:\u002F\u002Fwww.fusioncharts.com\u002Fdev\u002Fchart-guide\u002Flist-of-charts\" title=\"\"\u003Ehere\u003C\u002Fa\u003E.\u003C\u002Fp\u003E\n\u003C\u002Fblockquote\u003E\n\u003Cp\u003EThe Column 2D chart is shown below:\u003C\u002Fp\u003E\n\u003Cdiv class='chart-example'\u003E\n            \u003Cdiv id='chart-container-of-id-_Hu-TN2PD' style=\"\"\u003EFusionCharts will load here..\u003C\u002Fdiv\u003E\n               \u003Cscript type='text\u002Fjavascript' data-fc-chart\u003E\n                  var chart = new FusionCharts({\n    type: 'column2d',\n    renderAt: 'chart-container',\n    width: '700',\n    height: '400',\n    dataFormat: 'json',\n    dataSource: {\n        \u002F\u002F Chart Configuration\n        \"chart\": {\n            \"caption\": \"Countries With Most Oil Reserves [2017-18]\",\n            \"subCaption\": \"In MMbbl = One Million barrels\",\n            \"xAxisName\": \"Country\",\n            \"yAxisName\": \"Reserves (MMbbl)\",\n            \"numberSuffix\": \"K\",\n            \"theme\": \"fusion\",\n        },\n        \u002F\u002F Chart Data\n        \"data\": [{\n            \"label\": \"Venezuela\",\n            \"value\": \"290\"\n        }, {\n            \"label\": \"Saudi\",\n            \"value\": \"260\"\n        }, {\n            \"label\": \"Canada\",\n            \"value\": \"180\"\n        }, {\n            \"label\": \"Iran\",\n            \"value\": \"140\"\n        }, {\n            \"label\": \"Russia\",\n            \"value\": \"115\"\n        }, {\n            \"label\": \"UAE\",\n            \"value\": \"100\"\n        }, {\n            \"label\": \"US\",\n            \"value\": \"30\"\n        }, {\n            \"label\": \"China\",\n            \"value\": \"30\"\n        }]\n    }\n}).render('chart-container-of-id-_Hu-TN2PD');\n               \u003C\u002Fscript\u003E\n            \u003C\u002Fdiv\u003E\n\u003Cp\u003ETo understand the chart components, click \u003Ca href=\"\u002Fdev\u002Funderstanding-fusioncharts\" title=\"\"\u003Ehere\u003C\u002Fa\u003E.\u003C\u002Fp\u003E\n\u003Ch2 id=\"chart-data\"\u003EChart Data\u003C\u002Fh2\u003E\n\u003Cp\u003EThe data to render the above chart is shown in the table below:\u003C\u002Fp\u003E\n\u003Ctable\u003E\n\u003Cthead\u003E\n\u003Ctr\u003E\n\u003Cth\u003ECountry\u003C\u002Fth\u003E\n\u003Cth\u003ENo. of Oil Reserves\u003C\u002Fth\u003E\n\u003C\u002Ftr\u003E\n\u003C\u002Fthead\u003E\n\u003Ctbody\u003E\n\u003Ctr\u003E\n\u003Ctd\u003EVenezuela\u003C\u002Ftd\u003E\n\u003Ctd\u003E290K\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003ESaudi\u003C\u002Ftd\u003E\n\u003Ctd\u003E260K\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003ECanada\u003C\u002Ftd\u003E\n\u003Ctd\u003E180K\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003EIran\u003C\u002Ftd\u003E\n\u003Ctd\u003E140K\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003ERussia\u003C\u002Ftd\u003E\n\u003Ctd\u003E115K\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003EUAE\u003C\u002Ftd\u003E\n\u003Ctd\u003E100K\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003EUS\u003C\u002Ftd\u003E\n\u003Ctd\u003E30K\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003EChina\u003C\u002Ftd\u003E\n\u003Ctd\u003E30K\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003C\u002Ftbody\u003E\n\u003C\u002Ftable\u003E\n\u003Cp\u003EFusionCharts accepts data in \u003Cstrong\u003EJSON\u003C\u002Fstrong\u003E format. Following code is the JSON representation of the above table with the required attributes to render the above chart.\u003C\u002Fp\u003E\n\n\u003Cdiv class=\"code-wrapper server-side\"\u003E\n   \u003Cpre class=\"language-json\"\u003E\u003Ccode class=\"language-json\"\u003E\u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n  \u003Cspan class=\"token comment\"\u003E\u002F\u002F Chart Configuration\u003C\u002Fspan\u003E\n  \u003Cspan class=\"token property\"\u003E\"chart\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token property\"\u003E\"caption\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"Countries with Most Oil Reserves [2017-18]\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token property\"\u003E\"subCaption\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"In MMbbl = One Million barrels\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token property\"\u003E\"xAxisName\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"Country\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token property\"\u003E\"yAxisName\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"Reserves (MMbbl)\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token property\"\u003E\"numberSuffix\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"K\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token property\"\u003E\"theme\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"fusion\"\u003C\u002Fspan\u003E\n  \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n  \u003Cspan class=\"token comment\"\u003E\u002F\u002F Chart Data\u003C\u002Fspan\u003E\n  \u003Cspan class=\"token property\"\u003E\"data\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token punctuation\"\u003E[\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"label\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"Venezuela\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"value\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"290\"\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"label\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"Saudi\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"value\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"260\"\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"label\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"Canada\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"value\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"180\"\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"label\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"Iran\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"value\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"140\"\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"label\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"Russia\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"value\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"115\"\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"label\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"UAE\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"value\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"100\"\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"label\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"US\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"value\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"30\"\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E{\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"label\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"China\"\u003C\u002Fspan\u003E\u003Cspan class=\"token punctuation\"\u003E,\u003C\u002Fspan\u003E\n      \u003Cspan class=\"token property\"\u003E\"value\"\u003C\u002Fspan\u003E\u003Cspan class=\"token operator\"\u003E:\u003C\u002Fspan\u003E \u003Cspan class=\"token string\"\u003E\"30\"\u003C\u002Fspan\u003E\n    \u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\n  \u003Cspan class=\"token punctuation\"\u003E]\u003C\u002Fspan\u003E\n\u003Cspan class=\"token punctuation\"\u003E}\u003C\u002Fspan\u003E\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\u003C\u002Fpre\u003E\n\u003C\u002Fdiv\u003E\n\u003Cblockquote\u003E\n\u003Cp\u003EDifferent types of charts in FusionCharts expect different JSON formats, based on their grouping. Explore different JSON formats, for example, \u003Ca href=\"https:\u002F\u002Fwww.fusioncharts.com\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fline-area-and-column-charts\" title=\"\"\u003Esingle-series\u003C\u002Fa\u003E,\u003Ca href=\"https:\u002F\u002Fwww.fusioncharts.com\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fmulti-series-charts\" title=\"\"\u003Emulti-series\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fwww.fusioncharts.com\u002Fdev\u002Fchart-guide\u002Fstandard-charts\u002Fcombination-charts\" title=\"\"\u003Ecombination\u003C\u002Fa\u003E charts.\u003C\u002Fp\u003E\n\u003C\u002Fblockquote\u003E\n\u003Cp\u003EIn the above JSON data:\u003C\u002Fp\u003E\n\u003Cul\u003E\n\u003Cli\u003E\u003Cp\u003ECreate the \u003Ccode\u003Echart\u003C\u002Fcode\u003E object to define the elements of the chart.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003ESet the \u003Ccode\u003Ecaption\u003C\u002Fcode\u003E and \u003Ccode\u003Esubcaption\u003C\u002Fcode\u003E of the chart.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003ESet the value of \u003Ccode\u003ExAxisName\u003C\u002Fcode\u003E attribute to \u003Cstrong\u003ECountry\u003C\u002Fstrong\u003E(first column of the table).\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003ESet the value of \u003Ccode\u003EyAxisName\u003C\u002Fcode\u003E attribute to \u003Cstrong\u003EReserves\u003C\u002Fstrong\u003E(second column of the table).\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003EIn the \u003Ccode\u003Edata\u003C\u002Fcode\u003E array, create objects for each row and specify the \u003Ccode\u003Elabel\u003C\u002Fcode\u003E attribute to represent the Country. For example, \u003Cstrong\u003EVenezuela\u003C\u002Fstrong\u003E.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003ESimilarly, specify the \u003Ccode\u003Evalue\u003C\u002Fcode\u003E attribute to set the value of Oil Reserves in respective countries. For example, \u003Cstrong\u003E290K\u003C\u002Fstrong\u003E for \u003Cstrong\u003EVenezuela\u003C\u002Fstrong\u003E.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003ESet the \u003Ccode\u003EnumberSuffix\u003C\u002Fcode\u003E attribute to set the unit of the values.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003ESet the \u003Ccode\u003Etheme\u003C\u002Fcode\u003E attribute to apply the predefines themes to the chart.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n\u003Cp\u003EBoth the chart object and the data array contain a set of key-value pairs known as \u003Cstrong\u003Eattributes\u003C\u002Fstrong\u003E. These attributes are used to set the functional and cosmetic properties of the chart.\u003C\u002Fp\u003E\n\u003Cp\u003ENow that you have the data in JSON format, let&#39;s render the chart.\u003C\u002Fp\u003E\n\u003Ch2 id=\"render-the-chart\"\u003ERender the Chart\u003C\u002Fh2\u003E\n\u003Cp\u003ETo render the chart, follow the steps below:\u003C\u002Fp\u003E\n\u003Col\u003E\n\u003Cli\u003E\u003Cp\u003EInclude the \u003Ccode\u003Efusioncharts\u003C\u002Fcode\u003E library.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003EInclude the chart type.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003EInclude the FusionCharts theme file to apply style to the charts.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003EStore the chart configurations in a JSON object. In this JSON object:\u003C\u002Fp\u003E\n\u003Cul\u003E\n\u003Cli\u003ESet the chart type as \u003Ccode\u003Ecolumn2d\u003C\u002Fcode\u003E. Each chart type is represented with a unique chart alias. For Column 2D chart, the alias is \u003Ccode\u003Ecolumn2d\u003C\u002Fcode\u003E. Find the complete list of chart types with their respective alias \u003Ca href=\"https:\u002F\u002Fwww.fusioncharts.com\u002Fdev\u002Fchart-guide\u002Flist-of-charts\" title=\"\"\u003Ehere\u003C\u002Fa\u003E.\u003C\u002Fli\u003E\n\u003Cli\u003ESet the width and height (in pixels).\u003C\u002Fli\u003E\n\u003Cli\u003ESet the \u003Ccode\u003EdataFormat\u003C\u002Fcode\u003E as JSON.\u003C\u002Fli\u003E\n\u003Cli\u003EEmbed the json data as the value of the \u003Ccode\u003EdataSource\u003C\u002Fcode\u003E.\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003EAdd a container (instance) for the chart.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003C\u002Fol\u003E\n\u003Cp\u003EThe consolidated code is shown below:\u003C\u002Fp\u003E\n\u003Cdiv class=\"code-wrapper\"\u003E\n\u003Cul class='code-tabs extra-tabs'\u003E\n    \u003Cli class='active'\u003E\u003Ca data-toggle='cdn'\u003ECDN\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Ca data-toggle='localfiles'\u003ELocal Files\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Ca data-toggle='npm'\u003ENPM\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n\u003Cdiv class='tab-content extra-tabs'\u003E\n\u003Cdiv class='tab npm-tab'\u003E\n\u003Cdiv class='mt-30'\u003E\u003Cstrong\u003EThe \u003Ccode\u003Efusioncharts\u003C\u002Fcode\u003E package for \u003Ccode\u003Enpm\u003C\u002Fcode\u003E can be used in two different ways:\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Cul\u003E\n    \u003Cli\u003EFusionCharts ES module\u003C\u002Fli\u003E\n    \u003Cli\u003EFusionCharts CJS module\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n\u003Cdiv  class='mt-30'\u003E\u003Cstrong\u003EThe steps to render the chart for both the modules are shown below:\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Ch4\u003EES6\u003C\u002Fh4\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-javascript\"\u003E\n\u002F\u002F Include the core fusioncharts file from core  -\nimport FusionCharts from &#39;fusioncharts\u002Fcore&#39;;\n\n\u002F\u002F Include the chart from viz folder\n\u002F\u002F E.g. - import ChartType from fusioncharts\u002Fviz\u002F[ChartType]\nimport Column2D from &#39;fusioncharts\u002Fviz\u002Fcolumn2d&#39;;\n\n\u002F\u002F Include the fusion theme\nimport FusionTheme from &#39;fusioncharts\u002Fthemes\u002Fes\u002Ffusioncharts.theme.fusion&#39;;\n\n\u002F\u002F Add the chart and theme as dependency\n\u002F\u002F E.g. FusionCharts.addDep(ChartType)\nFusionCharts.addDep(Column2D);\nFusionCharts.addDep(FusionTheme);\n\n\u002F\u002F Create an Instance with chart options\nvar chartInstance = new FusionCharts({\ntype: &#39;Column2D&#39;,\nwidth: &#39;700&#39;, \u002F\u002F Width of the chart\nheight: &#39;400&#39;, \u002F\u002F Height of the chart\ndataFormat: &#39;json&#39;, \u002F\u002F Data type\nrenderAt:&#39;chart-container&#39;, \u002F\u002FContainer where the chart will render\ndataSource: {\n\u002F\u002F Chart Configuration\n&quot;chart&quot;: {\n&quot;caption&quot;: &quot;Countries With Most Oil Reserves [2017-18]&quot;,\n&quot;subCaption&quot;: &quot;In MMbbl = One Million barrels&quot;,\n&quot;xAxisName&quot;: &quot;Country&quot;,\n&quot;yAxisName&quot;: &quot;Reserves (MMbbl)&quot;,\n&quot;numberSuffix&quot;: &quot;K&quot;,\n&quot;theme&quot;: &quot;fusion&quot;\n},\n\u002F\u002F Chart Data\n&quot;data&quot;: [{\n&quot;label&quot;: &quot;Venezuela&quot;,\n&quot;value&quot;: &quot;290&quot;\n}, {\n&quot;label&quot;: &quot;Saudi&quot;,\n&quot;value&quot;: &quot;260&quot;\n}, {\n&quot;label&quot;: &quot;Canada&quot;,\n&quot;value&quot;: &quot;180&quot;\n}, {\n&quot;label&quot;: &quot;Iran&quot;,\n&quot;value&quot;: &quot;140&quot;\n}, {\n&quot;label&quot;: &quot;Russia&quot;,\n&quot;value&quot;: &quot;115&quot;\n}, {\n&quot;label&quot;: &quot;UAE&quot;,\n&quot;value&quot;: &quot;100&quot;\n}, {\n&quot;label&quot;: &quot;US&quot;,\n&quot;value&quot;: &quot;30&quot;\n}, {\n&quot;label&quot;: &quot;China&quot;,\n&quot;value&quot;: &quot;30&quot;\n}]\n}\n});\n\u002F\u002F Render\nchartInstance.render();\n\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\n\u003C\u002Fpre\u003E\n\u003Ch4\u003ECJS\u003C\u002Fh4\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-javascript\"\u003E\nvar FusionCharts = require(&#39;fusioncharts&#39;);\n\n\u002F\u002F Require charts from fusioncharts\nvar Charts = require(&#39;fusioncharts\u002Ffusioncharts.charts&#39;);\n\n\u002F\u002F Require theme from fusioncharts\nvar FusionTheme = require(&#39;fusioncharts\u002Fthemes\u002Ffusioncharts.theme.fusion&#39;);\n\n\u002F\u002F Add charts and themes as dependency\nCharts(FusionCharts);\nFusionTheme(FusionCharts);\n\n\u002F\u002F Create an Instance with chart options\nvar chartInstance = new FusionCharts({\ntype: &#39;Column2D&#39;,\nwidth: &#39;700&#39;, \u002F\u002F Width of the chart\nheight: &#39;400&#39;, \u002F\u002F Height of the chart\ndataFormat: &#39;json&#39;, \u002F\u002F Data type\nrenderAt:&#39;chart-container&#39;, \u002F\u002FContainer where the chart will render\ndataSource: {\n\u002F\u002F Chart Configuration\n&quot;chart&quot;: {\n&quot;caption&quot;: &quot;Countries With Most Oil Reserves [2017-18]&quot;,\n&quot;subCaption&quot;: &quot;In MMbbl = One Million barrels&quot;,\n&quot;xAxisName&quot;: &quot;Country&quot;,\n&quot;yAxisName&quot;: &quot;Reserves (MMbbl)&quot;,\n&quot;numberSuffix&quot;: &quot;K&quot;,\n&quot;theme&quot;: &quot;fusion&quot;\n},\n\u002F\u002F Chart Data\n&quot;data&quot;: [{\n&quot;label&quot;: &quot;Venezuela&quot;,\n&quot;value&quot;: &quot;290&quot;\n}, {\n&quot;label&quot;: &quot;Saudi&quot;,\n&quot;value&quot;: &quot;260&quot;\n}, {\n&quot;label&quot;: &quot;Canada&quot;,\n&quot;value&quot;: &quot;180&quot;\n}, {\n&quot;label&quot;: &quot;Iran&quot;,\n&quot;value&quot;: &quot;140&quot;\n}, {\n&quot;label&quot;: &quot;Russia&quot;,\n&quot;value&quot;: &quot;115&quot;\n}, {\n&quot;label&quot;: &quot;UAE&quot;,\n&quot;value&quot;: &quot;100&quot;\n}, {\n&quot;label&quot;: &quot;US&quot;,\n&quot;value&quot;: &quot;30&quot;\n}, {\n&quot;label&quot;: &quot;China&quot;,\n&quot;value&quot;: &quot;30&quot;\n}]\n}\n});\n\u002F\u002F Render\nchartInstance.render();\n\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\n\u003C\u002Fpre\u003E\n\u003Cdiv class='mt-30'\u003E\u003Cstrong\u003ETo include the specific chart types, individually add the following files using \u003Ccode\u003Erequire\u003C\u002Fcode\u003E\u003C\u002Fstrong\u003E\u003C\u002Fdiv\u003E\n\u003Cul\u003E\n    \u003Cli\u003E\u003Cstrong\u003EPowerCharts\u003C\u002Fstrong\u003E - \u003Ccode\u003Efusioncharts\u002Ffusioncharts.powercharts\u003C\u002Fcode\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Cstrong\u003EWidgets\u003C\u002Fstrong\u003E - \u003Ccode\u003Efusioncharts\u002Ffusioncharts.widgets\u003C\u002Fcode\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Cstrong\u003EGantt\u003C\u002Fstrong\u003E - \u003Ccode\u003Efusioncharts\u002Ffusioncharts.gantt\u003C\u002Fcode\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Cstrong\u003ETreemap\u003C\u002Fstrong\u003E -  \u003Ccode\u003Efusioncharts\u002Ffusioncharts.treemap\u003C\u002Fcode\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Cstrong\u003EZoomscatter\u003C\u002Fstrong\u003E - \u003Ccode\u003Efusioncharts\u002Ffusioncharts.zoomscatter\u003C\u002Fcode\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Cstrong\u003EZoomline\u003C\u002Fstrong\u003E - \u003Ccode\u003Efusioncharts\u002Ffusioncharts.zoomline\u003C\u002Fcode\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Cstrong\u003EOverlapped Bar\u003C\u002Fstrong\u003E - \u003Ccode\u003Efusioncharts\u002Ffusioncharts.overlappedbar2d\u003C\u002Fcode\u003E\u003C\u002Fli\u003E\n    \u003Cli\u003E\u003Cstrong\u003EOverlapped Column\u003C\u002Fstrong\u003E - \u003Ccode\u003Efusioncharts\u002Ffusioncharts.overlappedcolumn2d\u003C\u002Fcode\u003E\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n\u003C\u002Fdiv\u003E\n\n\u003Cdiv class='tab cdn-tab active'\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-javascript\"\u003E\n&lt;html&gt;\n&lt;head&gt;\n&lt;title&gt;My first chart using FusionCharts Suite XT&lt;\u002Ftitle&gt;\n&lt;!-- Include fusioncharts core library --&gt;\n&lt;script type=&quot;text\u002Fjavascript&quot; src=&quot;\u003Ca href=\"https:\u002F\u002Fcdn.fusioncharts.com\u002Ffusioncharts\u002Flatest\u002Ffusioncharts.js&quot;&gt;&lt;\u002Fscript&gt;\" title=\"\"\u003Ehttps:\u002F\u002Fcdn.fusioncharts.com\u002Ffusioncharts\u002Flatest\u002Ffusioncharts.js&quot;&gt;&lt;\u002Fscript&gt;\u003C\u002Fa\u003E\n&lt;!-- Include fusion theme --&gt;\n&lt;script type=&quot;text\u002Fjavascript&quot; src=&quot;\u003Ca href=\"https:\u002F\u002Fcdn.fusioncharts.com\u002Ffusioncharts\u002Flatest\u002Fthemes\u002Ffusioncharts.theme.fusion.js&quot;&gt;&lt;\u002Fscript&gt;\" title=\"\"\u003Ehttps:\u002F\u002Fcdn.fusioncharts.com\u002Ffusioncharts\u002Flatest\u002Fthemes\u002Ffusioncharts.theme.fusion.js&quot;&gt;&lt;\u002Fscript&gt;\u003C\u002Fa\u003E\n&lt;script type=&quot;text\u002Fjavascript&quot;&gt;\n    FusionCharts.ready(function(){\n    var fusioncharts = new FusionCharts({\n    type: &#39;column2d&#39;,\n    renderAt: &#39;chart-container&#39;,\n    width: &#39;700&#39;,\n    height: &#39;400&#39;,\n    dataFormat: &#39;json&#39;,\n    dataSource: {\n        \u002F\u002F Chart Configuration\n        &quot;chart&quot;: {\n            &quot;caption&quot;: &quot;Countries With Most Oil Reserves [2017-18]&quot;,\n            &quot;subCaption&quot;: &quot;In MMbbl = One Million barrels&quot;,\n            &quot;xAxisName&quot;: &quot;Country&quot;,\n            &quot;yAxisName&quot;: &quot;Reserves (MMbbl)&quot;,\n            &quot;numberSuffix&quot;: &quot;K&quot;,\n            &quot;theme&quot;: &quot;fusion&quot;,\n        },\n        \u002F\u002F Chart Data\n        &quot;data&quot;: [{\n            &quot;label&quot;: &quot;Venezuela&quot;,\n            &quot;value&quot;: &quot;290&quot;\n        }, {\n            &quot;label&quot;: &quot;Saudi&quot;,\n            &quot;value&quot;: &quot;260&quot;\n        }, {\n            &quot;label&quot;: &quot;Canada&quot;,\n            &quot;value&quot;: &quot;180&quot;\n        }, {\n            &quot;label&quot;: &quot;Iran&quot;,\n            &quot;value&quot;: &quot;140&quot;\n        }, {\n            &quot;label&quot;: &quot;Russia&quot;,\n            &quot;value&quot;: &quot;115&quot;\n        }, {\n            &quot;label&quot;: &quot;UAE&quot;,\n            &quot;value&quot;: &quot;100&quot;\n        }, {\n            &quot;label&quot;: &quot;US&quot;,\n            &quot;value&quot;: &quot;30&quot;\n        }, {\n            &quot;label&quot;: &quot;China&quot;,\n            &quot;value&quot;: &quot;30&quot;\n        }]\n    }\n});\n    fusioncharts.render();\n    });\n&lt;\u002Fscript&gt;\n&lt;\u002Fhead&gt;\n&lt;body&gt;\n    &lt;div id=&quot;chart-container&quot;&gt;FusionCharts XT will load here!&lt;\u002Fdiv&gt;\n&lt;\u002Fbody&gt;\n&lt;\u002Fhtml&gt;\n\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\u003C\u002Fpre\u003E\n\u003C\u002Fdiv\u003E\n\n\u003Cdiv class='tab localfiles-tab'\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-javascript\"\u003E\n&lt;html&gt;\n&lt;head&gt;\n&lt;title&gt;My first chart using FusionCharts Suite XT&lt;\u002Ftitle&gt;\n&lt;!-- Include fusioncharts core library --&gt;\n&lt;script type=&quot;text\u002Fjavascript&quot; src=&quot;path\u002Fto\u002Flocal\u002Ffusioncharts.js&quot;&gt;&lt;\u002Fscript&gt;\n&lt;!-- Include fusion theme --&gt;\n&lt;script type=&quot;text\u002Fjavascript&quot; src=&quot;path\u002Fto\u002Flocal\u002Fthemes\u002Ffusioncharts.theme.fusion.js&quot;&gt;&lt;\u002Fscript&gt;\n&lt;script type=&quot;text\u002Fjavascript&quot;&gt;\n    FusionCharts.ready(function(){\n    var fusioncharts = new FusionCharts({\n    type: &#39;column2d&#39;,\n    renderAt: &#39;chart-container&#39;,\n    width: &#39;700&#39;,\n    height: &#39;400&#39;,\n    dataFormat: &#39;json&#39;,\n    dataSource: {\n        \u002F\u002F Chart Configuration\n        &quot;chart&quot;: {\n            &quot;caption&quot;: &quot;Countries with Most Oil Reserves [2017-18]&quot;,\n            &quot;subCaption&quot;: &quot;In MMbbl = One Million barrels&quot;,\n            &quot;xAxisName&quot;: &quot;Country&quot;,\n            &quot;yAxisName&quot;: &quot;Reserves (MMbbl)&quot;,\n            &quot;numberSuffix&quot;: &quot;K&quot;,\n            &quot;theme&quot;: &quot;fusion&quot;,\n        },\n        \u002F\u002F Chart Data\n        &quot;data&quot;: [{\n            &quot;label&quot;: &quot;Venezuela&quot;,\n            &quot;value&quot;: &quot;290&quot;\n        }, {\n            &quot;label&quot;: &quot;Saudi&quot;,\n            &quot;value&quot;: &quot;260&quot;\n        }, {\n            &quot;label&quot;: &quot;Canada&quot;,\n            &quot;value&quot;: &quot;180&quot;\n        }, {\n            &quot;label&quot;: &quot;Iran&quot;,\n            &quot;value&quot;: &quot;140&quot;\n        }, {\n            &quot;label&quot;: &quot;Russia&quot;,\n            &quot;value&quot;: &quot;115&quot;\n        }, {\n            &quot;label&quot;: &quot;UAE&quot;,\n            &quot;value&quot;: &quot;100&quot;\n        }, {\n            &quot;label&quot;: &quot;US&quot;,\n            &quot;value&quot;: &quot;30&quot;\n        }, {\n            &quot;label&quot;: &quot;China&quot;,\n            &quot;value&quot;: &quot;30&quot;\n        }]\n    }\n});\n    fusioncharts.render();\n    });\n&lt;\u002Fscript&gt;\n&lt;\u002Fhead&gt;\n&lt;body&gt;\n    &lt;div id=&quot;chart-container&quot;&gt;FusionCharts XT will load here!&lt;\u002Fdiv&gt;\n&lt;\u002Fbody&gt;\n&lt;\u002Fhtml&gt;\n\u003C\u002Fcode\u003E\u003Cbutton class='btn btn-outline-secondary btn-copy' title='Copy to clipboard'\u003ECOPY\u003C\u002Fbutton\u003E\n\u003C\u002Fpre\u003E\n\u003C\u002Fdiv\u003E\n\n\u003Cp\u003E\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\u003C\u002Fp\u003E\n\u003Cp\u003EThat&#39;s it! Your first chart using Plain JavaScript is ready.\u003C\u002Fp\u003E\n\u003Ch2 id=\"problem-rendering-the-chart-\"\u003EProblem Rendering the Chart?\u003C\u002Fh2\u003E\n\u003Cp\u003EIn case there is an error, and you are unable to see the chart, check for the following:\u003C\u002Fp\u003E\n\u003Cul\u003E\n\u003Cli\u003E\u003Cp\u003EIf you are getting a JavaScript error on your page, check your browser console for the exact error and fix accordingly. If you&#39;re unable to solve it, click \u003Ca href=\"\u002Fdevsupport@fusioncharts.com\" title=\"\"\u003Ehere\u003C\u002Fa\u003E to get in touch with our support team.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003EIf the chart does not show up at all, but there are no JavaScript errors, check if the FusionCharts Suite XT JavaScript library has loaded correctly. You can use developer tools within your browser to see if \u003Ccode\u003Efusioncharts.js\u003C\u002Fcode\u003E was loaded.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Cp\u003EIf you get a \u003Cstrong\u003ELoading Data\u003C\u002Fstrong\u003E or \u003Cstrong\u003EError in loading data\u003C\u002Fstrong\u003E message, check whether your JSON data structure is correct, or there are conflicts related to quotation marks in your code.\u003C\u002Fp\u003E\n\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n",frontmatter:"title: Create a Chart Using FusionCharts | FusionCharts\ndescription: This article outlines the steps to be executed for creating your first chart using the plain javascript.\nheading: Create a Chart Using FusionCharts"}},serverRendered:true}}(false,"Change Chart Type","Creating your First Chart","Usage Guide","Apply Different Themes","Your First Chart","Working with Events","Your First Gauge","Adding Special Characters","Slice Data Plot","Setting Data Source Using URL","Lifecycle Event","Add Event Listener","Configuring your Chart","Working with APIs","Exporting Charts","Your First Map","Adding Annotations","Adding Drill-Down","Bind Event Listener","Percentage Calculation","Special Events","Overview","Events","Java","PHP","FusionCharts","ASP.NET","API Reference","Ruby on Rails","Methods","Tooltip","Installation","React","Django","Your First Map\t","Adding Drill-Down Charts","List of Charts","Pie and Doughnut Charts","Combination Charts","Stacked Charts","Scroll Charts","Funnel Chart","Pyramid Chart","Axes","Data Plot","Data Labels","Legend","React Native","Vue","Chart Attributes","jQuery","Ember","Properties","Type Definitions","Version History","v3.6.0","Getting Started","Create Your First Chart","Create Multivariate Chart","Add Multiple Data Plots","Export Charts","Time Axis","Time Navigator","Standard Range Selector","Custom Range Selector","Y-axis","Plain JavaScript","Time Marker","Data Marker","GroupBy","Pivot","Chart Components"));</script>
+  <script src="/dev/_nuxt/16032de5e05c19ab3db5.js" defer type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script src="/dev/_nuxt/526fe851a8b7029d4431.js" defer type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script src="/dev/_nuxt/46ed6423bb8b4a95d297.js" defer type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script src="/dev/_nuxt/2551c1210e8be6c18907.js" defer type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script src="/dev/_nuxt/301a8f165eb622598a38.js" defer type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script src="/dev/_nuxt/e8040aae1649b3092423.js" defer type="fd91ba1a905749ca502457bc-text/javascript"></script>
+  <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/95c75768/cloudflare-static/rocket-loader.min.js"
+    data-cf-settings="fd91ba1a905749ca502457bc-|49" defer=""></script>
+</body>
+
+</html>
