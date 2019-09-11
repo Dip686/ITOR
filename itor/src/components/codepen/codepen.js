@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Segment, Grid } from 'semantic-ui-react';
@@ -25,7 +26,6 @@ class CodePen extends Component {
     };
   }
   render() {
-    const currentCode = this.state.currentCode;
     return (
       <div>
         <Menu pointing secondary>

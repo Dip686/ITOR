@@ -3,15 +3,12 @@ import { Grid, Menu, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state /*, ownProps*/) => {
-    let ConfigReducer = state.configReducer;
+    let headerReducer = state.headerReducer;
     return {
-      headerProps: ConfigReducer.header
+      headerProps: headerReducer
     };
-  }, mapDispatchToProps = dispatch => {
+  }, mapDispatchToProps = () => {
     return {
-      updateHeader: () => {
-        dispatch({ type: 'HIDE_HEADER', payload: '' });
-      }
     };
   };
 
@@ -35,7 +32,7 @@ class Header extends Component {
               <Grid.Column>
               </Grid.Column>
               <Grid.Column>
-                <Segment onClick={this.props.updateHeader} basic size='large' style={{ 'fontSize': '16px' }}>
+                <Segment basic size='large' style={{ 'fontSize': '16px' }}>
                   {title}
                 </Segment>
               </Grid.Column>
@@ -46,7 +43,7 @@ class Header extends Component {
         </Menu>
       );
     }
-    return '<div></div>';
+    return null;
   }
 }
 export default connect(

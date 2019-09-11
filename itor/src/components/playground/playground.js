@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import { Grid, GridColumn } from 'semantic-ui-react';
 import CodePen from '../codepen/codepen';
@@ -13,7 +14,6 @@ export default class PlayGround extends Component {
     };
   }
   render() {
-    let index = this.state.index;
     return (
       <Grid divided>
         <Grid.Row style={{ 'padding': '2%' }}>

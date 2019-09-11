@@ -7,3 +7,6 @@ export default function stepsReducer (state = steps, action) {
       return state;
   }
 }
+export function setStepsInitialState (state) {
+  steps = state;
+}

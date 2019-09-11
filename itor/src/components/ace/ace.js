@@ -21,7 +21,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
   };
 
 class Editor extends Component {
-  onChange = (newValue) => {
+  onChange (newValue) {
     this.props.updateEditor(newValue);
   }
   render() {
@@ -38,7 +38,7 @@ class Editor extends Component {
         showGutter={true}
         highlightActiveLine={true}
         value = {editorProps.currentCode}
-        onChange = {this.onChange}
+        onChange = {(newValue)=>{this.onChange(newValue);}}
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,

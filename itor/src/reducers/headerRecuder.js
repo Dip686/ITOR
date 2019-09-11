@@ -1,5 +1,5 @@
 import { SHOW_HEADER, HIDE_HEADER } from '../actions/headerActions';
-const initialState = {
+let initialState = {
   visibility: true,
   title: 'variable Interactive Tutorial'
 };
@@ -16,5 +16,14 @@ export default function headerReducer(state = initialState, action) {
       });
     default:
       return state;
+  }
+}
+
+export function setHeaderInitialState (state) {
+  if (state != null) {
+    initialState = state;
+  } else {
+    initialState.visibility = 'false';
+    initialState.title = '';
   }
 }

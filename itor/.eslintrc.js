@@ -90,7 +90,7 @@ module.exports = {
         'block-scoped-var': 'error',
         'array-callback-return': 'error',
         'no-alert': 'error',
-        'no-console': 'error',
+        'no-console': 'warn',
         'no-empty-function': 'error',
         'no-loop-func': 'error',
         'no-useless-concat': 'error',
