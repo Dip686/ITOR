@@ -42,11 +42,11 @@ class CodePen extends Component {
           {/* <Editor updateSrc={this.updateSrc} script = {this.state.script}/> */}
         </Segment>
         <Modal trigger={<Button floated='right' icon labelPosition='left'> <Icon name='play'/> Play</Button>}>
-          <Modal.Header>Video Description</Modal.Header>
+          <Modal.Header>Introduction</Modal.Header>
           <Modal.Content>
             <video controls  width="100%" id="video-loader">
 
-              <source src="./mov_bbb.mp4"
+              <source src="./recording.mov"
                 type="video/mp4" />
               Sorry, your browser doesnot support embedded videos...
             </video>

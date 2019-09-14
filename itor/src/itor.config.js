@@ -29,7 +29,7 @@ export var config = {
 
 // export var config = {
 //   header: {
-//     title: 'FusionCharts Interactive tutorial'
+//     '_title': 'FusionCharts Interactive tutorial'
 //   },
 //   renderAt: 'root',
 //   narator: {

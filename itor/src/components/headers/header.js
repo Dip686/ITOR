@@ -32,7 +32,7 @@ class Header extends Component {
               <Grid.Column>
               </Grid.Column>
               <Grid.Column>
-                <Segment basic size='large' style={{ 'fontSize': '16px' }}>
+                <Segment basic size='mini' style={{ 'fontSize': '16px' }}>
                   {title}
                 </Segment>
               </Grid.Column>
