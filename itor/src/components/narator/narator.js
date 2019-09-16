@@ -19,16 +19,8 @@ const mapStateToProps = (state /*, ownProps*/) => {
   };
 
 class Narator extends Component {
-  constructor (props) {
-    super();
-    this.state = {
-      currentStep: props.naratorPros.defaultStep,
-      stepDetails: props.stepsPros[props.naratorPros.defaultStep]
-    };
-  }
-
   render() {
-    let state = this.state;
+    let state = this.props.naratorPros;
     return (
       <Grid divided="vertically">
         <Grid.Row>

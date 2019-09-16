@@ -6,24 +6,46 @@ import Editor from '../ace/ace';
 import Viewer from '../viewer/viewer';
 
 const mapStateToProps = (state /*, ownProps*/) => {
-    let editorReducer = state.editorReducer;
+    let editorReducer = state.editorReducer,
+      naratorReducer = state.naratorReducer;
     return {
-      editorPros: editorReducer
+      editorPros: editorReducer,
+      naratorPros: naratorReducer
     };
   }, mapDispatchToProps = dispatch => {
     return {
-      updateHeader: () => {
-        dispatch({ type: 'HIDE_HEADER', payload: '' });
+      setStep: (step) => {
+        dispatch({ type: 'SET_STEP', payload: step });
       }
     };
-  };
+  },
+  onePointOnetwoSix = 1.126,
+  twoThowsand = 2000;
 
 class CodePen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentCode: props.editorPros.currentCode,
+      showModal: false
     };
+  }
+  _componentDidMount () {
+    let codePen = this,
+      videoConfigs = codePen.props.naratorPros.video;
+    setTimeout(function(){  
+      let ele = document.getElementById('itorVideoPlayer');
+      ele.addEventListener('timeupdate', function itorTimeUpdate () {
+        let currTime = ele.currentTime * 1000;
+        for (let index = 0; index < videoConfigs.length; index++) {
+          const videoConfig = videoConfigs[index],
+            threshold = currTime / videoConfig.time;
+          if ( threshold > 1 && threshold < onePointOnetwoSix) {
+            codePen.props.setStep(videoConfig.step);
+            codePen.setState({ showModal: false });
+          }
+        }
+      });}, twoThowsand);
   }
   render() {
     return (
@@ -41,10 +63,10 @@ class CodePen extends Component {
           </Grid>
           {/* <Editor updateSrc={this.updateSrc} script = {this.state.script}/> */}
         </Segment>
-        <Modal trigger={<Button floated='right' icon labelPosition='left'> <Icon name='play'/> Play</Button>}>
+        <Modal open = {this.state.showModal} onOpen = {() => this._componentDidMount()} trigger={<Button onClick = {() => this.setState({ showModal: true })} floated='right' icon labelPosition='left'> <Icon name='play'/> Play</Button>}>
           <Modal.Header>Introduction</Modal.Header>
           <Modal.Content>
-            <video controls  width="100%" id="video-loader">
+            <video id = "itorVideoPlayer" controls  width="100%">
 
               <source src="./recording.mov"
                 type="video/mp4" />

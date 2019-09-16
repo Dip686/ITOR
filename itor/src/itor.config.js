@@ -23,6 +23,12 @@ export var config = {
         workingSample: 'code3',
         sampleHeader: '33'
       }
+    ],
+    video: [
+      {
+        time: 2000,
+        step: 3
+      }
     ]
   }
 };
