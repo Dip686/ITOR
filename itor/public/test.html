@@ -1,7 +1,41 @@
 <div>
+  <style>
+  code {
+    background-color: rgba(62,57,107,.02);
+    border: 1px solid rgba(62,57,107,.04);
+    border-radius: 2px;
+    color: #e9520c;
+    font-family: baseCodeRegular;
+    font-size: 87.5%;
+    font-weight: 600;
+    letter-spacing: .17px;
+    line-height: 15px;
+    padding-top: 0.15rem;
+    padding-right: 0.7rem;
+    padding-bottom: 0px;
+    padding-left: 0.7rem;
+    word-break: break-word;
+  }
+  .highLightSample {
+    background-color: rgba(62,57,107,.02);
+    border: 1px solid rgba(62,57,107,.04);
+    border-radius: 2px;
+    font-family: baseCodeRegular;
+    font-size: 87.5%;
+    font-weight: 600;
+    letter-spacing: .17px;
+    line-height: 15px;
+    padding-top: 0.15rem;
+    padding-right: 0.7rem;
+    padding-bottom: 0px;
+    padding-left: 0.7rem;
+    word-break: break-word;
+  }
+  </style>
   <div id="itorEle"></div>
   <script src="/static/js/bundle.js"></script>
   <script src="/static/js/1.chunk.js"></script>
+  <script src="/static/js/0.chunk.js"></script>
   <script src="/static/js/main.chunk.js"></script>
   <script>
     window.onload = function () {
@@ -16,7 +50,7 @@
           currentStep: 0,
           steps: [
             {
-              content: `The very first step is to create an HTML file. 
+              content: `The very first step is to create an <span class="highLightSample">HTML </span> file. Add a div element with id <span class="highLightSample">chart-container</span>.
         You can write it on the editor or click the below button to add HTML sample in the editor <p></p>`,
               workingSample: `<html>
         <head>
@@ -29,10 +63,10 @@
               sampleHeader: 'Create HTML Page'
             },
             {
-              content: `Include the FusionCharts JavaScript files from CDN. Refer the sample below<p></p>
+              content: `Include the <span class="highLightSample">FusionCharts</span> JavaScript files from CDN. Refer the sample below<p></p>
         <a href="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js">
         https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js</a>
-        Add the script in your HTML file to get FusionCharts in your webpage <p></p>`,
+        Add the script in your <span class="highLightSample">HTML</span> file to get FusionCharts in your webpage <p></p>`,
               workingSample: `<html>
         <head>
         <title>My first chart using FusionCharts Suite XT</title>
@@ -48,55 +82,117 @@
   sampleHeader: 'Add FusionCharts Script'
   },
   {
-  content: `FusionCharts accepts data in JSON format.
-  Following code is the JSON representation of the above table with the required attributes to render the above chart.
-  <p></p>
-  <pre>{
-          // Chart Configuration
-          "chart": {
-            "caption": "Countries With Most Oil Reserves [2017-18]",
-            "subCaption": "In MMbbl = One Million barrels",
-            "xAxisName": "Country",
-            "yAxisName": "Reserves (MMbbl)",
-            "numberSuffix": "K",
-            "theme": "fusion"
-          },
-          // Chart Data
-          "data": [
-            {
-              "label": "Venezuela",
-              "value": "290"
-            },
-            {
-              "label": "Saudi",
-              "value": "260"
-            },
-            {
-              "label": "Canada",
-              "value": "180"
-            },
-            {
-              "label": "Iran",
-              "value": "140"
-            },
-            {
-              "label": "Russia",
-              "value": "115"
-            },
-            {
-              "label": "UAE",
-              "value": "100"
-            },
-            {
-              "label": "US",
-              "value": "30"
-            },
-            {
-              "label": "China",
-              "value": "30"
+    content: `Include another script tag to implement fusioncharts in your webpage. <span class="highLightSample"> FusionCharts </span>
+     provides a static function named <code>ready</code> that allows to register callback functions that are executed 
+     when the FusionCharts library is ready to be used. 
+     In general, the FusionCharts framework is ready after the <code>DOMContentLoaded</code> browser event has been triggered and all the initial dependent files/modules are available.`,
+              workingSample: `
+      <html>
+        <head>
+          <title>My first chart using FusionCharts Suite XT</title>
+        </head>
+        <body>
+          <div id="chart-container">FusionCharts XT will load here!</div>
+          <!-- Include fusioncharts core library -->
+          <script type="text/javascript">
+            FusionCharts.ready(function(){
+            // we are going to instantiate and render FusionCharts here.
             }
-          ]
-        }</pre style="align:left"><p></p>`,
+          <\/script>
+        </body>
+      </html>`,
+    sampleHeader: 'Add FusionCharts Script'
+  },
+  {
+    content: `When you include FusionCharts in your website FusionCharts function gets included. You need create an instance of it and pass a <span class="highLightSample">JSON</span>
+    configuration. Remember based on your configuration the chart will get created. This configurations are very simple.
+    Add key renderAt in the JSON with an id as the value (id of the element which will have chart SVG content inside).
+    eg.
+    <pre>
+      <code>
+        {
+          renderAt: 'chart-container'
+        }
+      </code>
+    </pre>
+    In the same way provide key height and width with values that you want to assign to the chart.
+    Most importantly provide key <span class="highLightSample">type</span> and value as the chart type.
+    Eg. <code>column2d</code>
+    `,
+              workingSample: `
+      <html>
+        <head>
+          <title>My first chart using FusionCharts Suite XT</title>
+        </head>
+        <body>
+          <div id="chart-container">FusionCharts XT will load here!</div>
+          <!-- Include fusioncharts core library -->
+          <script type="text/javascript">
+            FusionCharts.ready(function(){
+              type: 'column2d',
+              renderAt: 'chart-container',
+              width: '700',
+              height: '400'
+            }
+          <\/script>
+        </body>
+      </html>`,
+    sampleHeader: 'Use FusionCharts ready function'
+  },
+  {
+  content: ` Two most important keys are <code>chart</code> and <code>data</code>. Chart takes a JSON object which consists of key value pair.
+  You can provide various key value configurations to incorporate different features. eg. use caption, subcaption, xAxisName, yAxisName as key and provide
+  some text as values. (Refer sample below provided).
+  In <span class="highLightSample">data</span> provide array of objects. Provide label and value as key in those objects. Label expects
+  string to describe and expects value to be number.(Refer sample below provided).
+  <p></p>
+  <pre><span class="highLightSample">{
+// Chart Configuration
+  "chart": {
+    "caption": "Countries With Most Oil Reserves [2017-18]",
+    "subCaption": "In MMbbl = One Million barrels",
+    "xAxisName": "Country",
+    "yAxisName": "Reserves (MMbbl)",
+    "numberSuffix": "K",
+    "theme": "fusion"
+  },
+  // Chart Data
+  "data": [
+    {
+      "label": "Venezuela",
+      "value": "290"
+    },
+    {
+      "label": "Saudi",
+      "value": "260"
+    },
+    {
+      "label": "Canada",
+      "value": "180"
+    },
+    {
+      "label": "Iran",
+      "value": "140"
+    },
+    {
+      "label": "Russia",
+      "value": "115"
+    },
+    {
+      "label": "UAE",
+      "value": "100"
+    },
+    {
+      "label": "US",
+      "value": "30"
+    },
+    {
+      "label": "China",
+      "value": "30"
+    }
+  ]
+}</span>
+</pre style="align:left"><p></p>`,
         workingSample: `<html>
         <head>
         <title>My first chart using FusionCharts Suite XT</title>
@@ -157,78 +253,75 @@
             <div id="chart-container">FusionCharts XT will load here!</div>
         </body>
         </html>`,
-        sampleHeader: 'Use sample data'
+        sampleHeader: 'Understand chart and data'
       },
       {
         content:`Call the render function to render the chart <p></p>
         <code> fusioncharts.render();</code>`,
-        workingSample: `<html>
-        <head>
-        <title>My first chart using FusionCharts Suite XT</title>
-        <!-- Include fusioncharts core library -->
-        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"><\/script>
-        <!-- Include fusion theme -->
-        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"><\/script>
-        <script type="text/javascript">
-            FusionCharts.ready(function(){
-            var fusioncharts = new FusionCharts({
-            type: 'column2d',
-            renderAt: 'chart-container',
-            width: '700',
-            height: '400',
-            dataFormat: 'json',
-            dataSource: {
-                // Chart Configuration
-                "chart": {
-                    "caption": "Countries With Most Oil Reserves [2017-18]",
-                    "subCaption": "In MMbbl = One Million barrels",
-                    "xAxisName": "Country",
-                    "yAxisName": "Reserves (MMbbl)",
-                    "numberSuffix": "K",
-                    "theme": "fusion",
-                },
-                // Chart Data
-                "data": [{
-                    "label": "Venezuela",
-                    "value": "290"
-                }, {
-                    "label": "Saudi",
-                    "value": "260"
-                }, {
-                    "label": "Canada",
-                    "value": "180"
-                }, {
-                    "label": "Iran",
-                    "value": "140"
-                }, {
-                    "label": "Russia",
-                    "value": "115"
-                }, {
-                    "label": "UAE",
-                    "value": "100"
-                }, {
-                    "label": "US",
-                    "value": "30"
-                }, {
-                    "label": "China",
-                    "value": "30"
-                }]
-            }
-        });
-            fusioncharts.render();
+        workingSample: `
+        <html>
+          <head>
+            <title>My first chart using FusionCharts Suite XT</title>
+          </head>
+          <body>
+              <div id="chart-container">FusionCharts XT will load here!</div>
+                <!-- Include fusioncharts core library -->
+            <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"><\/script>
+            <script type="text/javascript">
+                FusionCharts.ready(function(){
+                var fusioncharts = new FusionCharts({
+                type: 'column2d',
+                renderAt: 'chart-container',
+                width: '700',
+                height: '400',
+                dataFormat: 'json',
+                dataSource: {
+                    // Chart Configuration
+                    "chart": {
+                        "caption": "Countries With Most Oil Reserves [2017-18]",
+                        "subCaption": "In MMbbl = One Million barrels",
+                        "xAxisName": "Country",
+                        "yAxisName": "Reserves (MMbbl)"
+                    },
+                    // Chart Data
+                    "data": [{
+                        "label": "Venezuela",
+                        "value": "290"
+                    }, {
+                        "label": "Saudi",
+                        "value": "260"
+                    }, {
+                        "label": "Canada",
+                        "value": "180"
+                    }, {
+                        "label": "Iran",
+                        "value": "140"
+                    }, {
+                        "label": "Russia",
+                        "value": "115"
+                    }, {
+                        "label": "UAE",
+                        "value": "100"
+                    }, {
+                        "label": "US",
+                        "value": "30"
+                    }, {
+                        "label": "China",
+                        "value": "30"
+                    }]
+                }
             });
-        <\/script>
-        </head>
-        <body>
-            <div id="chart-container">FusionCharts XT will load here!</div>
-        </body>
+                fusioncharts.render();
+                });
+            <\/script>
+          </body>
         </html>`,
         sampleHeader: 'Call Render function'
       }
     ],
     video: [
     {
-      time: 2000,
+      time: 4000,
       step: 3
     }
   ]
